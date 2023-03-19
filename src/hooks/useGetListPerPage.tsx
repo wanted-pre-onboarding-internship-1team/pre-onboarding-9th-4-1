@@ -1,14 +1,12 @@
 import { httpClient } from '../apis/HttpClient';
 import { LIMIT, TODAY } from '../datas';
-import useFetch from './useFetch';
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export default function useGetListPerPage() {
   const [searchParams] = useSearchParams();
   const page = searchParams.get('offset') as string;
-
   const {
     data: todaySliceOrders = [],
     isLoading,
@@ -21,10 +19,14 @@ export default function useGetListPerPage() {
       return await httpClient()
         .then(res => {
           const { data } = res;
-          const todayData = data
-            .filter(order => order.transaction_time.split(' ')[0] === TODAY)
-            .slice(parseInt(page) * LIMIT, (parseInt(page) + 1) * LIMIT);
-          return todayData;
+          const todayData = data.filter(
+            order => order.transaction_time.split(' ')[0] === TODAY
+          );
+          const todaySliceData = todayData.slice(
+            parseInt(page) * LIMIT,
+            (parseInt(page) + 1) * LIMIT
+          );
+          return todaySliceData;
         })
         .catch(err => {
           if (err instanceof Error) throw err;

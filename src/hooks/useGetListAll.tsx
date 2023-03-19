@@ -1,5 +1,6 @@
 import { httpClient } from '../apis/HttpClient';
-import { LIMIT, TODAY } from '../datas/';
+import { LIMIT, TODAY } from '../datas';
+import { IResponse } from '../types/IResponse';
 import { useQuery } from '@tanstack/react-query';
 
 export default function useFetch() {
