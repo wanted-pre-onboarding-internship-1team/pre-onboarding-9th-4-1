@@ -1,12 +1,8 @@
-import { useSearchParams } from 'react-router-dom';
+import usePaging from '../../hooks/usePaging';
 import styled from 'styled-components';
 
 export default function PageButton({ idx }: { idx: number }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const handlePage = (idx: number) => {
-    searchParams.set('page', idx.toString());
-    setSearchParams(searchParams);
-  };
+  const handlePage = usePaging();
   return (
     <PageNumberButton onClick={() => handlePage(idx)}>
       {idx + 1}
