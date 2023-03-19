@@ -1,10 +1,13 @@
 import Router from './router/Router';
-import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import { mainTheme } from './styles/theme';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  *{
+    box-sizing: border-box;
+  }
   html, body, #root{
     height:100%;
     width:100%;
@@ -16,7 +19,9 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Router />
+      <ThemeProvider theme={mainTheme}>
+        <Router />
+      </ThemeProvider>
     </>
   );
 }
