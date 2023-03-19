@@ -1,5 +1,6 @@
 import { TX_LIST } from '../../consts/api';
 import { TX, TxResponse } from '../../interface/Transaction';
+import Transaction from './Transaction';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -24,7 +25,7 @@ export default function TransactionList() {
   return (
     <ul>
       {txList.map((tx: TX) => {
-        return <>{tx.id}</>;
+        return <Transaction tx={tx} key={tx.id} />;
       })}
     </ul>
   );
