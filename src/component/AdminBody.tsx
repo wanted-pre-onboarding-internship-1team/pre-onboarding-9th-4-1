@@ -1,61 +1,12 @@
-import { getTodayDataApi } from '../api/dataApi';
 import { COMMON_COLOR } from './../constants/colors';
-import { TODAY } from './../constants/orders';
-import usePage from './../hooks/usePage';
+import useTableData from './../hooks/useTableData';
+import useTableQuery from './../hooks/useTableQuery';
 import Table from './common/Table';
-import Tag from './common/Tag';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ColumnDef } from '@tanstack/react-table';
-import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
-type Item = {
-  name: string;
-  price: number;
-  quantity: number;
-};
-
 const AdminBody = () => {
-  const { currentPage, maxPage } = usePage();
-
-  const queryClient = useQueryClient();
-
-  const { isLoading, error, data } = useQuery(
-    ['data', currentPage],
-    () => {
-      console.log('fetching...👻');
-      return getTodayDataApi(currentPage, 50, TODAY);
-    },
-    {
-      staleTime: 5000,
-      refetchInterval: 5000,
-    }
-  );
-
-  const columnsMemo = useMemo<ColumnDef<Item>[]>(() => {
-    if (!data) return [];
-
-    return Object.keys(data[0]).map(key => ({
-      header: key,
-      accessorKey: key,
-      cell: info => {
-        const value = info.getValue() as string | number;
-        return key === 'status' ? <Tag value={value} /> : value;
-      },
-    }));
-  }, [data]);
-
-  const dataMemo = useMemo(() => data, [data]);
-
-  useEffect(() => {
-    if (currentPage <= maxPage - 2) {
-      const nextPage = currentPage + 1;
-
-      queryClient.prefetchQuery(['data', nextPage], () =>
-        getTodayDataApi(nextPage, 50, TODAY)
-      );
-    }
-  }, [currentPage, queryClient]);
+  const { getData, error, isLoading } = useTableQuery();
+  const { columns, data } = useTableData(getData);
 
   if (isLoading) return <AdminBodyWrapper>로딩 중입니다⏳</AdminBodyWrapper>;
 
@@ -63,7 +14,7 @@ const AdminBody = () => {
 
   return (
     <AdminBodyWrapper>
-      <Table data={dataMemo} columns={columnsMemo} />
+      <Table data={data} columns={columns} />
     </AdminBodyWrapper>
   );
 };

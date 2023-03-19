@@ -1,6 +1,6 @@
-import useAdminParams from '../../hooks/useAdminParams';
+import usePage from './../../hooks/usePage';
+import usePagination from './../../hooks/usePagination';
 import Button from './Button';
-import { MouseEvent } from 'react';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
 import styled from 'styled-components';
 
@@ -9,32 +9,16 @@ type PaginationProps = {
 };
 
 const Pagination = ({ maxPage }: PaginationProps) => {
-  const { currentParams, setParams } = useAdminParams('page');
-
-  const currentPage = Number(currentParams);
-
-  const start = currentPage - (currentPage % 5);
-  const end = start + 4 > maxPage - 1 ? maxPage - 1 : start + 4;
-
-  const prevClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    setParams(start - 1);
-  };
-
-  const nextClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    setParams(end + 1);
-  };
-
-  const numClickHandler = (num: number) => {
-    setParams(num);
-  };
-
-  const numList = new Array(end - start + 1)
-    .fill(0)
-    .map((_, idx) => idx + start);
+  const { currentPage, setPage } = usePage();
+  const { goNext, goPrev, setCurrent, numList } = usePagination(
+    maxPage,
+    currentPage,
+    setPage
+  );
 
   return (
     <PaginationWrapper>
-      <Button onClick={prevClickHandler} isDisabled={start <= 1}>
+      <Button onClick={goPrev} isDisabled={numList[0] <= 1}>
         <MdKeyboardArrowLeft size='20' />
       </Button>
 
@@ -42,13 +26,15 @@ const Pagination = ({ maxPage }: PaginationProps) => {
         <Button
           key={num}
           isSelected={num === currentPage}
-          onClick={() => numClickHandler(num)}
+          onClick={() => setCurrent(num)}
           styleType='ghost'>
           {num + 1}
         </Button>
       ))}
 
-      <Button onClick={nextClickHandler} isDisabled={end >= maxPage - 1}>
+      <Button
+        onClick={goNext}
+        isDisabled={(numList?.at(-1) ?? 0) >= maxPage - 1}>
         <MdKeyboardArrowRight size='20' />
       </Button>
     </PaginationWrapper>
