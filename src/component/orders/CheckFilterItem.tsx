@@ -16,7 +16,7 @@ export default function CheckFilterItem({
     <Item>
       <input
         type='checkbox'
-        onClick={() => {
+        onChange={() => {
           onChange(name, !value);
         }}
         checked={value}
