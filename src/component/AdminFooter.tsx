@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const AdminFooter = () => {
   const { currentPage, maxPage, length } = usePage();
 
-  const from = currentPage * MAX_NUM;
+  const from = currentPage * MAX_NUM + 1;
   const to = from + MAX_NUM < length ? from + MAX_NUM : length;
 
   return (

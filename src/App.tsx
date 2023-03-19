@@ -1,7 +1,5 @@
-import Mainpage from './pages/Mainpage';
 import Router from './router/Router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
@@ -24,7 +22,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <Router />
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
