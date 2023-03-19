@@ -4,7 +4,7 @@ import { CheckFilters } from '../../types/CheckFilters';
 import Filters from './Filters';
 import OrderList from './OrderList';
 import PageNavigator from './PageNavigator';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -31,6 +31,14 @@ export default function Orders() {
     limit: 50,
     checkFilters,
   });
+
+  if (parseInt(currentPage) < 1) {
+    setSearchParams({ page: '1' });
+  }
+
+  if (parseInt(currentPage) > lastPage) {
+    setSearchParams({ page: lastPage.toString() });
+  }
 
   const onChangePage = useCallback(
     (page: number) => {
