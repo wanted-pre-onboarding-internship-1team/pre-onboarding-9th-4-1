@@ -15,5 +15,7 @@ export default function Transaction({ tx }: { tx: TX }) {
     </TableRow>
   );
 }
-const TableRow = styled.tr``;
+const TableRow = styled.tr`
+  width: 100%;
+`;
 const RowColumn = styled.td``;
