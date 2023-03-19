@@ -1,4 +1,5 @@
 import { COMMON_COLOR } from './../constants/colors';
+import Pagination from './common/Pagination';
 import styled from 'styled-components';
 
 const AdminFooter = () => {
@@ -7,6 +8,7 @@ const AdminFooter = () => {
 
   return (
     <AdminFooterWrapper>
+      <Pagination maxPage={MAX_PAGE} />
       <Text>
         {currentPage + 1} of {MAX_PAGE} pages
       </Text>
