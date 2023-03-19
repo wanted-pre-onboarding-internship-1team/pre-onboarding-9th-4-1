@@ -21,5 +21,5 @@ const TableHeader = styled.thead`
 const HeaderColumn = styled.th`
   padding: 12px;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 20px;
 `;

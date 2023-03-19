@@ -17,7 +17,7 @@ export default function TransactionTableBody() {
 
   return (
     <TableBody>
-      {txList.map((tx: TX) => {
+      {txList.slice(0, 10).map((tx: TX) => {
         return <Transaction tx={tx} key={tx.id} />;
       })}
     </TableBody>
@@ -25,6 +25,6 @@ export default function TransactionTableBody() {
 }
 
 const TableBody = styled.tbody`
-  border-collapse: collapse;
   width: 100%;
+  background-color: #efefef;
 `;

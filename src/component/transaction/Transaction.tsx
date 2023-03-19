@@ -3,7 +3,6 @@ import { parseDate } from '../../utils/date';
 import styled from 'styled-components';
 
 export default function Transaction({ tx }: { tx: TX }) {
-  //   console.log();
   return (
     <>
       <TableRow>
@@ -22,11 +21,12 @@ export default function Transaction({ tx }: { tx: TX }) {
 }
 const TableRow = styled.tr`
   width: 100%;
-  border-radius: 7px;
   background-color: white;
 `;
 const RowColumn = styled.td`
+  text-align: center;
   padding: 20px 12px;
+  padding: 10px;
 `;
 
 const RowSpacer = styled.tr``;

@@ -27,8 +27,8 @@ const Table = styled.table`
   width: 800px;
   background-color: #efefef;
   color: #212529;
-  box-sizing: border-box;
 `;
+
 const ScrollBodyWrapper = styled.div`
   height: 500px;
   overflow: auto;
