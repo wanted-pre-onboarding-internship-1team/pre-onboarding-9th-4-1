@@ -5,15 +5,23 @@ export default function CheckFilterItem({
   name,
   text,
   value,
+  onChange,
 }: {
   name: string;
   text: string;
   value: boolean;
+  onChange: (name: string, value: boolean) => void;
 }) {
   return (
     <Item>
-      <input type='checkbox' />
-      <b>오늘거래만 표시</b>
+      <input
+        type='checkbox'
+        onClick={() => {
+          onChange(name, !value);
+        }}
+        checked={value}
+      />
+      <b>{text}</b>
     </Item>
   );
 }

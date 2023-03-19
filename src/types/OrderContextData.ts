@@ -4,4 +4,5 @@ import { Order } from './Order';
 export default interface OrderContextData {
   data: Order[];
   checkFilter: CheckFilters;
+  onChangeCheckFilterValue: (name: string, newValue: boolean) => void;
 }

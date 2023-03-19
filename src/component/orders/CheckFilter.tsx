@@ -9,7 +9,8 @@ import styled from 'styled-components';
  * @returns
  */
 function CheckFilter() {
-  const { checkFilter } = useContext<OrderContextData>(OrderContext);
+  const { checkFilter, onChangeCheckFilterValue } =
+    useContext<OrderContextData>(OrderContext);
   const checkItems: { name: string; text: string; value: boolean }[] = [
     {
       name: 'isOnlyToday',
@@ -25,6 +26,7 @@ function CheckFilter() {
           name={item.name}
           text={item.text}
           value={item.value}
+          onChange={onChangeCheckFilterValue}
         />
       ))}
     </Ul>

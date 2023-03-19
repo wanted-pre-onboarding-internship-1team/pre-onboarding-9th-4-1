@@ -3,7 +3,7 @@ import useOrder from '../../hooks/useOrder';
 import { CheckFilters } from '../../types/CheckFilters';
 import Filters from './Filters';
 import OrderList from './OrderList';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -13,6 +13,18 @@ export default function Orders() {
   const [checkFilters, setCheckFilters] = useState<CheckFilters>({
     isOnlyToday: true,
   });
+
+  const checkFilterValueChangeHandler = useCallback(
+    (name: string, newValue: boolean) => {
+      setCheckFilters(prev => {
+        return {
+          ...prev,
+          [name]: newValue,
+        };
+      });
+    },
+    []
+  );
   const { data } = useOrder({
     currentPage: parseInt(page),
     limit: 50,
@@ -21,12 +33,13 @@ export default function Orders() {
   return (
     <Wrapper
       onClick={() => {
-        setSearchParams({ page: (parseInt(page) + 1).toString() });
+        // setSearchParams({ page: (parseInt(page) + 1).toString() });
       }}>
       <OrderContext.Provider
         value={{
           data: data,
           checkFilter: checkFilters,
+          onChangeCheckFilterValue: checkFilterValueChangeHandler,
         }}>
         <Filters />
         <OrderList />

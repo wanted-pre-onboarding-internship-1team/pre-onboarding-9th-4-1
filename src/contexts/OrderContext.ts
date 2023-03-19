@@ -6,4 +6,7 @@ export const OrderContext = createContext<OrderContextData>({
   checkFilter: {
     isOnlyToday: true,
   },
+  onChangeCheckFilterValue: (name: string, newValue: boolean) => {
+    /* */
+  },
 });
