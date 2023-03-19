@@ -8,7 +8,17 @@ import styled from 'styled-components';
  * @returns
  */
 function OrderItem(props: Order) {
-  return <Item>{props?.customer_name}</Item>;
+  const status = props?.status ? '처리완료' : '처리중';
+  return (
+    <Item>
+      <span className='id'>{props?.id}</span>
+      <span className='transaction_time'>{props?.transaction_time}</span>
+      <span className='status'>{status}</span>
+      <span className='customer_id'>{props?.customer_id}</span>
+      <span className='customer_name'>{props?.customer_name}</span>
+      <span className='currency'>{props?.currency}</span>
+    </Item>
+  );
 }
 
 const Item = styled.li``;
