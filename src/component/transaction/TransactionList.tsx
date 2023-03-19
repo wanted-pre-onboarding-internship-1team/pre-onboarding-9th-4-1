@@ -1,20 +1,8 @@
-import { TX_LIST } from '../../consts/api';
 import Center from '../common/Center';
 import Pagination from './Pagination';
 import TransactionTableBody from './TransactionTableBody';
 import TransactionTableHeader from './TransactionTableHeader';
-import axios from 'axios';
 import styled from 'styled-components';
-
-export async function fetchTx(page: number) {
-  return await axios
-    .get(TX_LIST)
-    .then(res => res.data.slice(page * 50, (page + 1) * 50));
-}
-
-export async function fetchPages() {
-  return await axios.get(TX_LIST).then(res => res.data.length / 50);
-}
 
 // 스타일 참고 : https://preview.colorlib.com/theme/bootstrap/css-table-14/
 export default function TransactionList() {

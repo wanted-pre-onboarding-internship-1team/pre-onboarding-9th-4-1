@@ -1,4 +1,4 @@
-import { fetchTx } from '../component/transaction/TransactionList';
+import { fetchTx } from '../api/fetchTx';
 import { TX } from '../interface/Transaction';
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
@@ -11,7 +11,7 @@ export default function usePagedTables() {
   useEffect(() => {
     const page = Number.parseInt(searchParams.get('page') ?? '0');
     setPage(page >= 0 ? Math.floor(page) : 0);
-  });
+  }, [searchParams]);
 
   const {
     isLoading,

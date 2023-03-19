@@ -1,5 +1,5 @@
+import { fetchPages } from '../../api/fetchTx';
 import PageButton from './PageButton';
-import { fetchPages } from './TransactionList';
 import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 
