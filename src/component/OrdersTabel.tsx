@@ -1,65 +1,64 @@
 import useFetch from '../hooks/useFetch';
-import useGetListPerPage, { LIMIT } from '../hooks/useGetListPerPage';
+import useGetListPerPage from '../hooks/useGetListPerPage';
 import usePageQuery from '../hooks/usePageQuery';
-import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function OrdersTabel_test() {
   const [page, setPage] = useState<number>(0);
-  const { isPreviousData, maxPage } = useFetch();
+  const { maxPage } = useFetch();
   const { setQuery } = usePageQuery();
-  const { todayOrders } = useGetListPerPage();
-  console.log(todayOrders);
+  const { todaySliceOrders, isPreviousData } = useGetListPerPage();
+  console.log(todaySliceOrders);
 
   const columns: GridColDef[] = [
     {
       field: 'id',
-      headerName: 'id',
-      width: 50,
+      headerName: '주문번호',
+      width: 100,
       editable: false,
       sortable: true,
     },
     {
       field: 'transaction_time',
-      headerName: 'transaction_time',
+      headerName: '거래시간',
       width: 170,
       editable: false,
       sortable: true,
     },
     {
       field: 'status',
-      headerName: 'status',
+      headerName: '처리상태',
       type: 'boolean',
-      width: 70,
+      width: 100,
       editable: false,
       sortable: false,
     },
     {
       field: 'customer_id',
-      headerName: 'customer_id',
+      headerName: '고객번호',
       type: 'number',
       editable: false,
       sortable: false,
-      width: 160,
+      width: 100,
     },
     {
       field: 'customer_name',
-      headerName: 'customer_name',
+      headerName: '고객이름',
       editable: false,
       sortable: false,
       width: 160,
     },
     {
       field: 'currency',
-      headerName: 'currency',
+      headerName: '가격',
       editable: false,
       sortable: false,
-      width: 160,
+      width: 100,
     },
   ];
-  const rows = todayOrders;
+  const rows = todaySliceOrders;
 
   const handleBeforeButton = () => {
     setPage(old => Math.max(old - 1, 0));
@@ -103,7 +102,7 @@ export default function OrdersTabel_test() {
 }
 
 const TableContainer = styled.div``;
-const GridBox = styled(Box)`
+const GridBox = styled.div`
   height: 1200px;
   width: 100%;
 `;

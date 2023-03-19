@@ -1,11 +1,10 @@
 import { httpClient } from '../apis/HttpClient';
-import { LIMIT } from './useGetListPerPage';
+import { LIMIT, TODAY } from '../datas/';
 import { useQuery } from '@tanstack/react-query';
 
-const TODAY = '2023-03-08';
 export default function useFetch() {
   const {
-    data: todayOrders = [],
+    data: todayAllOrders = [],
     isLoading,
     isError,
     isPreviousData,
@@ -15,10 +14,10 @@ export default function useFetch() {
       return await httpClient()
         .then(res => {
           const { data } = res;
-          const todayData = data.filter(
+          const todayAllData = data.filter(
             order => order.transaction_time.split(' ')[0] === TODAY
           );
-          return todayData;
+          return todayAllData;
         })
         .catch(err => {
           if (err instanceof Error) throw err;
@@ -32,6 +31,8 @@ export default function useFetch() {
     }
   );
   const maxPage =
-    todayOrders?.length !== 0 ? Math.ceil(todayOrders?.length / LIMIT) : 1;
-  return { todayOrders, isLoading, isError, isPreviousData, maxPage };
+    todayAllOrders?.length !== 0
+      ? Math.ceil(todayAllOrders?.length / LIMIT)
+      : 1;
+  return { todayAllOrders, isLoading, isError, isPreviousData, maxPage };
 }
