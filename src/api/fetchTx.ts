@@ -1,26 +1,18 @@
 import { TX_LIST } from '../consts/api';
-import { SINGLE_PAGE_SIGE } from '../consts/page';
-import { TX } from '../interface/Transaction';
-import { createToday, datesAreOnSameDay } from '../utils/date';
+import { SIZE_PER_PAGE } from '../consts/page';
+import { filterTodayTx } from '../utils/transaction';
 import axios from 'axios';
 
 export async function fetchTx(page: number) {
-  return await axios.get(TX_LIST).then(res =>
-    res.data
-      .filter((tx: TX) => {
-        const txDate = new Date(tx.transaction_time);
-        return datesAreOnSameDay(createToday(), txDate);
-      })
-      .slice(page * SINGLE_PAGE_SIGE, (page + 1) * SINGLE_PAGE_SIGE)
+  const res = await axios.get(TX_LIST);
+  return filterTodayTx(res).slice(
+    page * SIZE_PER_PAGE,
+    (page + 1) * SIZE_PER_PAGE
   );
 }
 
 export async function fetchPages() {
-  return await axios.get(TX_LIST).then(res => {
-    const filteredList = res.data.filter((tx: TX) => {
-      const txDate = new Date(tx.transaction_time);
-      return datesAreOnSameDay(createToday(), txDate);
-    });
-    return Math.ceil(filteredList.length / SINGLE_PAGE_SIGE);
-  });
+  const res = await axios.get(TX_LIST);
+  const filteredList = filterTodayTx(res);
+  return Math.ceil(filteredList.length / SIZE_PER_PAGE);
 }

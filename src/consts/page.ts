@@ -1,1 +1,1 @@
-export const SINGLE_PAGE_SIGE = 50;
+export const SIZE_PER_PAGE = 50;

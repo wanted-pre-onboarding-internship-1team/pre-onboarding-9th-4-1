@@ -1,8 +1,8 @@
-// export interface TxResponse {
-//   data: TX[];
-//   status: number;
-//   statusText: string;
-// }
+export interface TxResponse {
+  data: TX[];
+  status: number;
+  statusText: string;
+}
 
 // - 데이터 스키마
 //     - `id(주문번호)`: `number`
