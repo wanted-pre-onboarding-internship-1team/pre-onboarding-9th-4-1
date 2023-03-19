@@ -17,5 +17,9 @@ export default function Transaction({ tx }: { tx: TX }) {
 }
 const TableRow = styled.tr`
   width: 100%;
+  border-radius: 7px;
+  background-color: white;
 `;
-const RowColumn = styled.td``;
+const RowColumn = styled.td`
+  padding: 20px 12px;
+`;

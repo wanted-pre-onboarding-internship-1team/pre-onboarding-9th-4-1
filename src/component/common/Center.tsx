@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 export default function Center({
   children,
-  height,
+  height = '',
 }: {
   children: ReactNode;
-  height: string;
+  height?: string;
 }) {
   const CenterDiv = styled.div`
     width: 100%;
