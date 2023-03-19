@@ -1,11 +1,18 @@
+import { TODAY } from '../../constants/orders';
 import { COMMON_COLOR } from './../../constants/colors';
+import { getDayOfWeek } from './../../units/getDayOfWeek';
 import styled from 'styled-components';
 
 const Header = () => {
+  const today = TODAY;
+  const dayOfWeek = getDayOfWeek(today);
+
   return (
     <HeaderWrapper>
       <Tilte>Switchwon</Tilte>
-      <Text>2023-03-08, 수요일</Text>
+      <Text>
+        {TODAY}, {dayOfWeek}요일
+      </Text>
     </HeaderWrapper>
   );
 };
