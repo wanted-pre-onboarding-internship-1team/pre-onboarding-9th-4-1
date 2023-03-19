@@ -25,7 +25,7 @@ export default function useOrder({
 }) {
   const { data } = useQuery<Order[]>(['fetchOrderList'], () => fetchOrders(), {
     useErrorBoundary: false,
-    retryDelay: 5000,
+    refetchInterval: 5000,
   });
   const filterData = getFilterData(data ?? [], checkFilters);
   return {
