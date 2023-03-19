@@ -1,6 +1,7 @@
 import useGetListAll from '../hooks/useGetListAll';
 import useGetListPerPage from '../hooks/useGetListPerPage';
 import usePageQuery from '../hooks/usePageQuery';
+import { IResponse } from '../types/IResponse';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { RxChevronLeft, RxChevronRight } from 'react-icons/rx';
@@ -11,6 +12,7 @@ export default function OrdersTabel() {
   const { maxPage } = useGetListAll();
   const { setQuery } = usePageQuery();
   const { todaySliceOrders, isLoading, isPreviousData } = useGetListPerPage();
+  // const { rowData, setRowData } = useState<IResponse[]>(todaySliceOrders);
 
   const columns: GridColDef[] = [
     {
@@ -91,7 +93,7 @@ export default function OrdersTabel() {
       <TableInner>
         <TableTitle>주문현황</TableTitle>
         {isLoading ? (
-          <div>loading</div>
+          <div>loading...</div>
         ) : (
           <>
             <GridBox>
@@ -100,6 +102,7 @@ export default function OrdersTabel() {
                 columns={columns}
                 pageSizeOptions={[50]}
                 hideFooter={true}
+                paginationModel={{ pageSize: 50, page: 0 }}
                 checkboxSelection
                 disableRowSelectionOnClick
               />
@@ -144,7 +147,7 @@ const TableTitle = styled.h1`
 
 const GridBox = styled.div`
   height: 100%;
-  width: 100%;
+  width: 80%;
 `;
 const TableFooter = styled.div`
   display: flex;
