@@ -1,16 +1,8 @@
 import { TX_LIST } from '../consts/api';
 import { SIZE_PER_PAGE } from '../consts/page';
+import { delay5Second } from '../utils/delay';
 import { filterTodayTx } from '../utils/transaction';
 import axios from 'axios';
-
-const delay5Second = () => {
-  return new Promise((resolve, _) => {
-    setTimeout(() => {
-      console.log('강제 delay');
-      resolve('리졸브 끝!');
-    }, 1 * 1000);
-  });
-};
 
 export async function fetchTx(page: number) {
   const res = await axios.get(TX_LIST);
