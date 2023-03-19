@@ -1,27 +1,22 @@
 import usePagedTables from '../../hooks/usePagedTables';
 import { TX } from '../../interface/Transaction';
+import Spinner from '../common/Spinner';
 import Transaction from './Transaction';
+import { Suspense } from 'react';
 import styled from 'styled-components';
 
 export default function TransactionTableBody() {
   const { isLoading, error, txList } = usePagedTables();
-  if (isLoading) {
-    console.log('로롣로로롤로딩!!');
-    return null;
-  }
-
+  if (isLoading) return <Spinner />;
   if (error) return null;
 
-  //   if (txList === undefined) {
-  //     console.log('아무고토업쥬!!');
-  //     return null;
-  //   }
-  // txList
   return (
     <TableBody>
+      {/* <Suspense fallback={'로딩중...'}> */}
       {txList?.map((tx: TX) => {
         return <Transaction tx={tx} key={tx.id} />;
       })}
+      {/* </Suspense> */}
     </TableBody>
   );
 }
