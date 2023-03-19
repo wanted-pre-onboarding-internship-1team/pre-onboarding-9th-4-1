@@ -1,11 +1,12 @@
 import { TX } from '../../interface/Transaction';
 import { parseDate } from '../../utils/date';
+import TableRow from '../common/TableRow';
 import styled from 'styled-components';
 
 export default function Transaction({ tx }: { tx: TX }) {
   return (
     <>
-      <TableRow>
+      <TableRow color='white'>
         <RowColumn>{tx.id}</RowColumn>
         <RowColumn>{tx.customer_id}</RowColumn>
         <RowColumn>{tx.customer_name}</RowColumn>
@@ -19,10 +20,6 @@ export default function Transaction({ tx }: { tx: TX }) {
     </>
   );
 }
-const TableRow = styled.tr`
-  width: 100%;
-  background-color: white;
-`;
 const RowColumn = styled.td`
   text-align: center;
   padding: 20px 12px;
