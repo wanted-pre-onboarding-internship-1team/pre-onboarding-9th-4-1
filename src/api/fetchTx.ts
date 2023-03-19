@@ -8,7 +8,7 @@ const delay5Second = () => {
     setTimeout(() => {
       console.log('강제 delay');
       resolve('리졸브 끝!');
-    }, 5 * 1000);
+    }, 1 * 1000);
   });
 };
 
