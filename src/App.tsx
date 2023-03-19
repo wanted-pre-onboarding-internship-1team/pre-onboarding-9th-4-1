@@ -1,19 +1,26 @@
-import React from 'react';
+import Router from './router/Router';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  html, body, #root{
-    height:100%;
-    width:100%;
-    position:relative;
+
+  html, body {
+    font-size: 62.5%;
   }
-  
+
+  * {
+    box-sizing: border-box;
+  }
 `;
+
 function App() {
-  <GlobalStyle />;
-  return <div>1</div>;
+  return (
+    <>
+      <GlobalStyle />
+      <Router />
+    </>
+  );
 }
 
 export default App;
