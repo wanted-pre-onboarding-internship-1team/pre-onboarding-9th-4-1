@@ -9,3 +9,12 @@ export const parseDate = (transactionTime: Date) => {
     second: 'numeric',
   });
 };
+
+export const createToday = () => {
+  return new Date('2023-03-08');
+};
+
+export const datesAreOnSameDay = (first: Date, second: Date) =>
+  first.getFullYear() === second.getFullYear() &&
+  first.getMonth() === second.getMonth() &&
+  first.getDate() === second.getDate();
