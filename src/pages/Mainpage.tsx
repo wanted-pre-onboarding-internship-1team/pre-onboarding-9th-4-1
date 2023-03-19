@@ -1,5 +1,17 @@
-import React from 'react';
+import { MockApi } from '../api/MockApi';
+import React, { useEffect } from 'react';
 
 export default function Mainpage() {
-  return <div>Mainpage</div>;
+  const api = new MockApi();
+  useEffect(() => {
+    const data = api.getData().then(res => {
+      console.log(res);
+    });
+  }, []);
+
+  return (
+    <div>
+      <div>asdasd1</div>
+    </div>
+  );
 }
