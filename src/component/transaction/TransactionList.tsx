@@ -20,7 +20,7 @@ export default function TransactionList() {
 }
 
 const Table = styled.table`
-  width: 800px;
+  width: 900px;
   background-color: #efefef;
   color: #212529;
 `;
