@@ -31,5 +31,6 @@ export default function useOrder({
   return {
     data:
       filterData?.slice((currentPage - 1) * limit, currentPage * limit) ?? [],
+    lastPage: Math.ceil(filterData?.length / limit) ?? 0,
   };
 }
