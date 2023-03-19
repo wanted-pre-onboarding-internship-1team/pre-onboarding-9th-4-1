@@ -20,6 +20,6 @@ export default function useOrder({
     item => item.transaction_time.split(' ')[0] === TODAY
   );
   return {
-    data: todayData,
+    data: todayData?.slice((currentPage - 1) * limit, currentPage * limit),
   };
 }
