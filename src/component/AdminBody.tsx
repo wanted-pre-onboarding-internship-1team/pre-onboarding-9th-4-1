@@ -3,7 +3,39 @@ import Table from './common/Table';
 import styled from 'styled-components';
 
 const AdminBody = () => {
-  return <AdminBodyWrapper>table</AdminBodyWrapper>;
+  const dummyColumns = [
+    {
+      header: 'Name',
+      accessorKey: 'name',
+    },
+    {
+      header: 'Price',
+      accessorKey: 'price',
+    },
+    {
+      header: 'Quantity',
+      accessorKey: 'quantity',
+    },
+  ];
+
+  const dummyData = () => {
+    const items = [];
+    for (let i = 0; i < 10; i++) {
+      items.push({
+        id: i,
+        name: `Item ${i}`,
+        price: 100,
+        quantity: 1,
+      });
+    }
+    return items;
+  };
+
+  return (
+    <AdminBodyWrapper>
+      <Table data={dummyData()} columns={dummyColumns} />
+    </AdminBodyWrapper>
+  );
 };
 
 const AdminBodyWrapper = styled.div`
