@@ -8,7 +8,7 @@ export default function PageButton({ idx }: { idx: number }) {
     setSearchParams(searchParams);
   };
   return (
-    <PageNumberButton onClick={() => handlePage(idx)} key={idx}>
+    <PageNumberButton onClick={() => handlePage(idx)}>
       {idx + 1}
     </PageNumberButton>
   );

@@ -17,7 +17,7 @@ export default function Pagination() {
   return (
     <Pages>
       {Array.from(Array(pages), (_: number, idx: number) => {
-        return <PageButton idx={idx} />;
+        return <PageButton idx={idx} key={idx} />;
       })}
     </Pages>
   );
