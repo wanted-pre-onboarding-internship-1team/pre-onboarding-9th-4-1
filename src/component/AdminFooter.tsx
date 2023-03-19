@@ -1,10 +1,13 @@
+import useAdminParams from '../hooks/useAdminParams';
 import { COMMON_COLOR } from './../constants/colors';
 import Pagination from './common/Pagination';
 import styled from 'styled-components';
 
 const AdminFooter = () => {
+  const { currentParams } = useAdminParams('page');
+
   const MAX_PAGE = 10;
-  const currentPage = 1;
+  const currentPage = Number(currentParams);
 
   return (
     <AdminFooterWrapper>
