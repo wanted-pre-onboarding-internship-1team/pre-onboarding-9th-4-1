@@ -1,7 +1,8 @@
+import { OrderContext } from '../../contexts/OrderContext';
 import { Order } from '../../types/Order';
 import OrderItem from './OrderItem';
 import OrderListHeader from './OrderListHeader';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 /**
@@ -9,7 +10,8 @@ import styled from 'styled-components';
  * @props list: Order[]
  * @returns
  */
-export default function OrderList({ list = [] }: { list: Order[] }) {
+export default function OrderList() {
+  const { data }: { data: Order[] } = useContext(OrderContext);
   return (
     <List>
       <OrderListHeader
@@ -20,7 +22,7 @@ export default function OrderList({ list = [] }: { list: Order[] }) {
         customer_name='고객이름'
         currency='가격'
       />
-      {list.map(order => {
+      {data.map(order => {
         return <OrderItem key={order.id} {...order} />;
       })}
     </List>
@@ -30,9 +32,6 @@ export default function OrderList({ list = [] }: { list: Order[] }) {
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  background-color: #e2e2e2;
-  padding: 1rem;
-
   li {
     display: inline-flex;
     align-items: center;
