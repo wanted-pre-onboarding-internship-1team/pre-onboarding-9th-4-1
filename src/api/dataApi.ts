@@ -16,7 +16,7 @@ export const getTodayDataApi = async (
 ) => {
   const response = await axios.get('/data/mockData.json');
   const begin = skip * limit;
-  const end = skip * limit + limit;
+  const end = skip * limit + limit || undefined;
 
   const filterd = response.data.filter((item: DataType) =>
     item.transaction_time.includes(today)

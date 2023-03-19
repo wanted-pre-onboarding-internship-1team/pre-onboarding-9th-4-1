@@ -1,19 +1,16 @@
-import useAdminParams from '../hooks/useAdminParams';
+import usePage from '../hooks/usePage';
 import { COMMON_COLOR } from './../constants/colors';
 import Pagination from './common/Pagination';
 import styled from 'styled-components';
 
 const AdminFooter = () => {
-  const { currentParams } = useAdminParams('page');
-
-  const MAX_PAGE = 10;
-  const currentPage = Number(currentParams);
+  const { currentPage, maxPage } = usePage();
 
   return (
     <AdminFooterWrapper>
-      <Pagination maxPage={MAX_PAGE} />
+      <Pagination maxPage={maxPage} />
       <Text>
-        {currentPage + 1} of {MAX_PAGE} pages
+        {currentPage + 1} of {maxPage} pages
       </Text>
     </AdminFooterWrapper>
   );

@@ -1,7 +1,7 @@
 import { getTodayDataApi } from '../api/dataApi';
 import { COMMON_COLOR } from './../constants/colors';
 import { TODAY } from './../constants/orders';
-import useAdminParams from './../hooks/useAdminParams';
+import usePage from './../hooks/usePage';
 import Table from './common/Table';
 import Tag from './common/Tag';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -16,11 +16,9 @@ type Item = {
 };
 
 const AdminBody = () => {
-  const { currentParams } = useAdminParams('page');
-  const queryClient = useQueryClient();
+  const { currentPage, maxPage } = usePage();
 
-  const MAX_PAGE = 10;
-  const currentPage = Number(currentParams);
+  const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery(
     ['data', currentPage],
@@ -50,7 +48,7 @@ const AdminBody = () => {
   const dataMemo = useMemo(() => data, [data]);
 
   useEffect(() => {
-    if (currentPage <= MAX_PAGE - 2) {
+    if (currentPage <= maxPage - 2) {
       const nextPage = currentPage + 1;
 
       queryClient.prefetchQuery(['data', nextPage], () =>
