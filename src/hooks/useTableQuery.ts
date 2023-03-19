@@ -1,5 +1,5 @@
 import { getTodayDataApi } from '../api/dataApi';
-import { TODAY } from '../constants/orders';
+import { MAX_NUM, TODAY } from '../constants/orders';
 import usePage from './usePage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ const useTableQuery = () => {
     ['data', currentPage],
     () => {
       console.log('fetching...👻');
-      return getTodayDataApi(currentPage, 50, TODAY);
+      return getTodayDataApi(currentPage, MAX_NUM, TODAY);
     },
     {
       staleTime: 5000,
@@ -29,7 +29,7 @@ const useTableQuery = () => {
       const nextPage = currentPage + 1;
 
       queryClient.prefetchQuery(['data', nextPage], () =>
-        getTodayDataApi(nextPage, 50, TODAY)
+        getTodayDataApi(nextPage, MAX_NUM, TODAY)
       );
     }
   }, [currentPage, queryClient]);

@@ -1,16 +1,20 @@
+import { MAX_NUM } from '../constants/orders';
 import usePage from '../hooks/usePage';
 import { COMMON_COLOR } from './../constants/colors';
 import Pagination from './common/Pagination';
 import styled from 'styled-components';
 
 const AdminFooter = () => {
-  const { currentPage, maxPage } = usePage();
+  const { currentPage, maxPage, length } = usePage();
+
+  const from = currentPage * MAX_NUM;
+  const to = from + MAX_NUM < length ? from + MAX_NUM : length;
 
   return (
     <AdminFooterWrapper>
       <Pagination maxPage={maxPage} />
       <Text>
-        {currentPage + 1} of {maxPage} pages
+        {from} - {to} of {length} result
       </Text>
     </AdminFooterWrapper>
   );
