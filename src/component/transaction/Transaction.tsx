@@ -5,14 +5,19 @@ import styled from 'styled-components';
 export default function Transaction({ tx }: { tx: TX }) {
   //   console.log();
   return (
-    <TableRow>
-      <RowColumn>{tx.id}</RowColumn>
-      <RowColumn>{tx.customer_id}</RowColumn>
-      <RowColumn>{tx.customer_name}</RowColumn>
-      <RowColumn>{tx.currency}</RowColumn>
-      <RowColumn>{parseDate(tx.transaction_time)}</RowColumn>
-      <RowColumn>{tx.status ? '주문 완료' : '주문 전'}</RowColumn>
-    </TableRow>
+    <>
+      <TableRow>
+        <RowColumn>{tx.id}</RowColumn>
+        <RowColumn>{tx.customer_id}</RowColumn>
+        <RowColumn>{tx.customer_name}</RowColumn>
+        <RowColumn>{tx.currency}</RowColumn>
+        <RowColumn>{parseDate(tx.transaction_time)}</RowColumn>
+        <RowColumn>{tx.status ? '주문 완료' : '주문 전'}</RowColumn>
+      </TableRow>
+      <RowSpacer>
+        <Spacer />
+      </RowSpacer>
+    </>
   );
 }
 const TableRow = styled.tr`
@@ -22,4 +27,9 @@ const TableRow = styled.tr`
 `;
 const RowColumn = styled.td`
   padding: 20px 12px;
+`;
+
+const RowSpacer = styled.tr``;
+const Spacer = styled.td`
+  height: 10px;
 `;
