@@ -1,3 +1,5 @@
+import Router from './router/Router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
@@ -11,9 +13,17 @@ const GlobalStyle = createGlobalStyle`
   }
   
 `;
+
+// Create a client
+const queryClient = new QueryClient();
+
 function App() {
-  <GlobalStyle />;
-  return <div>1</div>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <GlobalStyle />
+      <Router />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
