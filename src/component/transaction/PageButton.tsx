@@ -10,4 +10,6 @@ export default function PageButton({ idx }: { idx: number }) {
   );
 }
 
-const PageNumberButton = styled.button``;
+const PageNumberButton = styled.button`
+  margin: 0 2px;
+`;
