@@ -17,7 +17,7 @@ const quertOptions: QueryClientConfig = {
   defaultOptions: {
     queries: {
       staleTime: 1000 * 5,
-      cacheTime: 1000 * 5,
+      cacheTime: 1000 * 60,
       refetchOnMount: false,
       refetchInterval: 1000 * 5,
     },

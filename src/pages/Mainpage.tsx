@@ -1,3 +1,4 @@
+import MockFooter from '../component/MockFooter';
 import MockList from '../component/MockListContent';
 import MockListContent from '../component/MockListContent';
 import { useMockList, usePagenation } from '../hooks';
@@ -5,7 +6,6 @@ import React, { Suspense } from 'react';
 import styled from 'styled-components';
 
 export default function Mainpage() {
-  const aa = usePagenation();
   return (
     <Container>
       <MockListContent>
@@ -14,6 +14,9 @@ export default function Mainpage() {
           <MockListContent.List />
         </Suspense>
       </MockListContent>
+      <Suspense fallback={<div>로딩중</div>}>
+        <MockFooter />
+      </Suspense>
     </Container>
   );
 }
@@ -24,4 +27,7 @@ const Container = styled.main`
   margin: 0 auto;
   padding: 4rem;
   min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;

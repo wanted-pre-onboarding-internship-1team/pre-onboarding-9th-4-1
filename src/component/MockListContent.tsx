@@ -14,7 +14,7 @@ const Container = styled.section`
   width: 100%;
   min-height: 300px;
   background: ${({ theme }) => theme.color.backgroundSemiDark};
-  height: auto;
+  height: 100%;
   border-radius: 1rem;
   overflow: hidden;
 `;
@@ -39,6 +39,8 @@ const HeaderContainer = styled.ul`
   justify-items: center;
   background: #fdf2e4;
   color: #333333;
+  position: sticky;
+  top: 0;
 `;
 
 const HeaderItem = styled.li`
@@ -58,4 +60,6 @@ function List() {
 
 const ListContainer = styled.ul`
   width: 100%;
+  overflow: auto;
+  height: 100%;
 `;

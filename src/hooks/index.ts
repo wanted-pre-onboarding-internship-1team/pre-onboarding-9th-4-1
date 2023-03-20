@@ -18,13 +18,6 @@ export function useMockList() {
     suspense: true,
   });
 
-  // orign
-  // () =>
-  //     fetchMock().then(res =>
-  //       res
-  //         .filter(item => item.transaction_time.split(' ')[0] === TODAY)
-  //         .sort((a, b) => a.id - b.id)
-  //     ),
   let pagedList = originList
     ?.filter(item => item.transaction_time.split(' ')[0] === TODAY)
     .sort((a, b) => a.id - b.id)
@@ -44,13 +37,15 @@ const COUNT_PER_PAGE = 50;
 
 export function usePagenation() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const queryClient = useQueryClient();
-  const data = queryClient
-    .getQueryData<MockResponse[]>(['mockList'])!
-    .filter(item => item.transaction_time.split(' ')[0] === TODAY);
+  const { data = [] } = useQuery(['mockList'], fetchMock, { suspense: true });
+  const todatData = data.filter(
+    item => item.transaction_time.split(' ')[0] === TODAY
+  );
 
-  const currentPage = Number(searchParams.get('page'));
-  const totalPageCount = Math.ceil(data.length / COUNT_PER_PAGE);
+  //페이징 처리 부분
+  const pageList = [];
+  const currentPage = Number(searchParams.get('page')) || 1;
+  const totalPageCount = Math.ceil(todatData.length / COUNT_PER_PAGE);
   const totalGroupCount = Math.ceil(totalPageCount / PAGES_COUNT_PER_GROUP);
   const currentGroup = Math.ceil(currentPage / PAGES_COUNT_PER_GROUP);
   const startPage = (currentGroup - 1) * PAGES_COUNT_PER_GROUP + 1;
@@ -59,6 +54,37 @@ export function usePagenation() {
     totalPageCount
   );
 
-  console.log(totalGroupCount, startPage, endPage);
-  return { totalGroupCount, startPage, endPage };
+  for (let i = startPage; i <= endPage; i++) {
+    pageList.push(i);
+  }
+
+  const onClickPage = (page: number) => {
+    setSearchParams({ page: String(page) });
+  };
+
+  const onClickPrevGroup = (e: React.MouseEvent) => {
+    const prevPage = startPage - 1;
+    if (1 > prevPage) return;
+    setSearchParams({
+      page: String(prevPage),
+    });
+  };
+
+  const onClickNextGroup = (e: React.MouseEvent) => {
+    const nextPage = endPage + 1;
+    if (nextPage > totalPageCount) return;
+    setSearchParams({
+      page: String(nextPage),
+    });
+  };
+
+  return {
+    totalGroupCount,
+    pageList,
+    startPage,
+    endPage,
+    onClickPage,
+    onClickNextGroup,
+    onClickPrevGroup,
+  };
 }
