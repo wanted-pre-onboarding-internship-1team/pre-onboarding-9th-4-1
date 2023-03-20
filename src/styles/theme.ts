@@ -2,6 +2,6 @@ import { DefaultTheme } from 'styled-components';
 
 export const mainTheme: DefaultTheme = {
   color: {
-    background: '#faf7f7',
+    backgroundSemiDark: '#e8e6e6',
   },
 } as const;

@@ -12,17 +12,16 @@ const GlobalStyle = createGlobalStyle`
     height:100%;
     width:100%;
     position:relative;
+    background: ${({ theme }) => theme.color.backgroundSemiDark};
   }
   
 `;
 function App() {
   return (
-    <>
+    <ThemeProvider theme={mainTheme}>
       <GlobalStyle />
-      <ThemeProvider theme={mainTheme}>
-        <Router />
-      </ThemeProvider>
-    </>
+      <Router />
+    </ThemeProvider>
   );
 }
 
