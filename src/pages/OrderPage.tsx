@@ -3,7 +3,6 @@ import { OrderList } from '../component/OrderList';
 import Pagenation from '../component/Pagenation';
 import { useOrderData } from '../hooks/useOrderData';
 import { usePagenation } from '../hooks/usePagenation';
-import { useSearchParams } from 'react-router-dom';
 
 export default function OrderPage() {
   const api = new MockApi();
