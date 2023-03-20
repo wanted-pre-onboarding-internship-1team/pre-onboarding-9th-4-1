@@ -27,10 +27,15 @@ const Container = styled.li`
   grid-row-gap: 0.1rem;
   margin-top: 0.1rem;
   font-size: 0.8rem;
+  background-color: white;
+
+  &:hover {
+    background: #fff6ed4f;
+    color: #6d4c41;
+  }
 `;
 
 const Item = styled.div`
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
