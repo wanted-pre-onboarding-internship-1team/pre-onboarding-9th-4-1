@@ -22,9 +22,11 @@ export default function OrderList() {
         customer_name='고객이름'
         currency='가격'
       />
-      {data.map(order => {
-        return <OrderItem key={order.id} {...order} />;
-      })}
+      <OrderListBody>
+        {data.map(order => {
+          return <OrderItem key={order.id} {...order} />;
+        })}
+      </OrderListBody>
     </List>
   );
 }
@@ -32,7 +34,9 @@ export default function OrderList() {
 const List = styled.ul`
   display: flex;
   flex-direction: column;
+
   li {
+    box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -40,10 +44,6 @@ const List = styled.ul`
     padding: 1rem;
     border-top: 1px solid #686666;
     background-color: white;
-  }
-
-  li:nth-child(2) {
-    border-top: none;
   }
 
   li.list-header {
@@ -75,4 +75,9 @@ const List = styled.ul`
   .currency {
     flex: 10%;
   }
+`;
+
+const OrderListBody = styled.div`
+  max-height: 600px;
+  overflow: scroll;
 `;

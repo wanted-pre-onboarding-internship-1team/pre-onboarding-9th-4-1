@@ -21,6 +21,8 @@ function OrderItem(props: Order) {
   );
 }
 
-const Item = styled.li``;
+const Item = styled.li`
+  width: 100%;
+`;
 
 export default OrderItem;

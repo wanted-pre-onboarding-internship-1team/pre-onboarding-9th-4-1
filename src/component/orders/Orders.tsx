@@ -3,6 +3,7 @@ import useOrder from '../../hooks/useOrder';
 import { CheckFilters } from '../../types/CheckFilters';
 import Filters from './Filters';
 import OrderList from './OrderList';
+import OrderListHeader from './OrderListHeader';
 import PageNavigator from './PageNavigator';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -48,10 +49,7 @@ export default function Orders() {
   );
 
   return (
-    <Wrapper
-      onClick={() => {
-        // setSearchParams({ page: (parseInt(page) + 1).toString() });
-      }}>
+    <Wrapper>
       <OrderContext.Provider
         value={{
           data: data,
@@ -62,6 +60,7 @@ export default function Orders() {
           onChangePage: onChangePage,
         }}>
         <Filters />
+
         <OrderList />
         <PageNavigator />
       </OrderContext.Provider>
@@ -76,4 +75,5 @@ const Wrapper = styled.section`
   box-sizing: border-box;
   padding: 1rem;
   width: 100%;
+  min-height: 100vh;
 `;
