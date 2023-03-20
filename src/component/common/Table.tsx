@@ -53,6 +53,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
 };
 
 const TableWrapper = styled.table`
+  table-layout: fixed;
   width: 100%;
   border-spacing: 0;
   border-collapse: separate;
@@ -75,11 +76,11 @@ const TableRow = styled.tr`
 `;
 
 const Cell = css`
-  line-height: 48px;
+  height: 60px;
   margin: 0;
   padding: 5px;
   border-bottom: 1px solid ${COMMON_COLOR.border};
-  white-space: nowrap;
+  vertical-align: middle;
   font-size: 1.4rem;
 
   :last-child {
@@ -97,6 +98,7 @@ const Th = styled.th`
 
   position: sticky;
   top: 0;
+  white-space: nowrap;
   background-color: ${COMMON_COLOR.backgroundSection};
   font-weight: 700;
 `;
