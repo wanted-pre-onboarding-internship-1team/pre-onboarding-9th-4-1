@@ -5,6 +5,7 @@ const useOrderData = (api: Api, targetDate: Date) => {
   const { data } = useQuery({
     queryKey: ['orderData'],
     queryFn: () => api.getData(),
+    staleTime: 5 * 60 * 1000,
   });
 
   const orderData = data?.filter(({ transaction_time }) => {
