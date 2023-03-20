@@ -57,6 +57,9 @@ const Table = styled.table`
 `;
 
 const Td = styled.td`
+  width: 300px;
+  height: 100;
+  word-break: break-all;
   border: solid 1px black;
   margin: 2px;
   padding: 4px;
