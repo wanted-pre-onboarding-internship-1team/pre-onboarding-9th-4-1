@@ -20,18 +20,19 @@ const OrderList = ({ data }: OrderListProps) => {
         </tr>
       </thead>
       <tbody>
-        {data.map(orderItem => {
-          return (
-            <Tr key={orderItem.id}>
-              <Td>{orderItem.id}</Td>
-              <Td>{orderItem.customer_id}</Td>
-              <Td>{orderItem.customer_name}</Td>
-              <Td>{orderItem.status ? '성공' : '실패'}</Td>
-              <Td>{orderItem.transaction_time.toLocaleString()}</Td>
-              <Td>${orderItem.currency}</Td>
-            </Tr>
-          );
-        })}
+        {data &&
+          data.map(orderItem => {
+            return (
+              <Tr key={orderItem.id}>
+                <Td>{orderItem.id}</Td>
+                <Td>{orderItem.customer_id}</Td>
+                <Td>{orderItem.customer_name}</Td>
+                <Td>{orderItem.status ? '성공' : '실패'}</Td>
+                <Td>{orderItem.transaction_time.toLocaleString()}</Td>
+                <Td>${orderItem.currency}</Td>
+              </Tr>
+            );
+          })}
       </tbody>
     </Table>
   );
