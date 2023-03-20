@@ -8,15 +8,15 @@ type OrderListProps = {
 const OrderList = ({ data }: OrderListProps) => {
   return (
     <Table>
-      <caption>OrderList</caption>
+      <caption>주문 내역</caption>
       <thead>
         <tr>
-          <th>주문 ID</th>
-          <th>고객 ID</th>
-          <th>고객명</th>
-          <th>상태</th>
-          <th>주문 시간</th>
-          <th>가격</th>
+          <Th>주문 ID</Th>
+          <Th>고객 ID</Th>
+          <Th>고객명</Th>
+          <Th>상태</Th>
+          <Th>주문 시간</Th>
+          <Th>가격</Th>
         </tr>
       </thead>
       <tbody>
@@ -45,13 +45,24 @@ const Tr = styled.tr`
 `;
 
 const Table = styled.table`
-  width: 100%;
   text-align: center;
-  font-size: 1.5rem;
+  border: 1px #a39485 solid;
+  font-size: 0.9em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
 `;
 
 const Td = styled.td`
   border: solid 1px black;
   margin: 2px;
   padding: 4px;
+`;
+
+const Th = styled.th`
+  font-weight: bold;
+  color: #fff;
+  background: #73685d;
 `;
