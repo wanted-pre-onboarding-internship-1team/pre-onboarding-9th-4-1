@@ -1,4 +1,4 @@
-import { OrderItem } from '../component/OrderItem';
+import { OrderItem, OrderItemDTO } from '../component/OrderItem';
 import { Api } from './Api';
 
 class MockApi implements Api {
@@ -6,15 +6,14 @@ class MockApi implements Api {
     const response = await fetch('/data/mockData.json');
     const data = await response.json();
 
-    return data;
-  }
-
-  async refetch(): Promise<OrderItem[]> {
-    const response = await fetch('/data/mockData.json');
-    const data = await response.json();
-
-    console.log('refetch called');
-    return data;
+    const proccessedData = data.map((orderItemDTO: OrderItemDTO) => {
+      return {
+        ...orderItemDTO,
+        transaction_time: new Date(orderItemDTO.transaction_time),
+        currency: Number(orderItemDTO.currency.replace('$', '')),
+      };
+    });
+    return proccessedData;
   }
 }
 

@@ -1,17 +1,10 @@
-import { MockApi } from '../api/MockApi';
-import React, { useEffect } from 'react';
+import OrderList from '../component/OrderList';
 
 export default function Mainpage() {
-  const api = new MockApi();
-  useEffect(() => {
-    const data = api.getData().then(res => {
-      console.log(res);
-    });
-  }, []);
-
   return (
     <div>
       <div>asdasd1</div>
+      <OrderList />
     </div>
   );
 }
