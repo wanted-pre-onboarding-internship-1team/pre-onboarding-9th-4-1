@@ -12,17 +12,9 @@ const useTableQuery = () => {
     isLoading,
     error,
     data: getData,
-  } = useQuery(
-    ['data', currentPage],
-    () => {
-      console.log('fetching...👻');
-      return getTodayDataApi(currentPage, MAX_NUM, TODAY);
-    },
-    {
-      staleTime: 5000,
-      refetchInterval: 5000,
-    }
-  );
+  } = useQuery(['data', currentPage], () => {
+    return getTodayDataApi(currentPage, MAX_NUM, TODAY);
+  });
 
   useEffect(() => {
     if (currentPage <= maxPage - 2) {
