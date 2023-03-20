@@ -43,7 +43,6 @@ export function usePagenation() {
   );
 
   //페이징 처리 부분
-  const pageList = [];
   const currentPage = Number(searchParams.get('page')) || 1;
   const totalPageCount = Math.ceil(todatData.length / COUNT_PER_PAGE);
   const totalGroupCount = Math.ceil(totalPageCount / PAGES_COUNT_PER_GROUP);
@@ -54,9 +53,10 @@ export function usePagenation() {
     totalPageCount
   );
 
-  for (let i = startPage; i <= endPage; i++) {
-    pageList.push(i);
-  }
+  const pageList = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => i + startPage
+  );
 
   const onClickPage = (page: number) => {
     setSearchParams({ page: String(page) });
@@ -83,6 +83,7 @@ export function usePagenation() {
     pageList,
     startPage,
     endPage,
+    currentPage,
     onClickPage,
     onClickNextGroup,
     onClickPrevGroup,
