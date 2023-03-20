@@ -1,4 +1,4 @@
-import { Api } from '../api/Api';
+import { Api } from '../interfaces/Api';
 import { useQuery } from '@tanstack/react-query';
 
 const useOrderData = (api: Api, targetDate: Date) => {

@@ -1,8 +1,8 @@
-import { OrderItem } from './OrderItem';
+import { OrderData } from '../interfaces/OrderItem';
 import styled from 'styled-components';
 
 type OrderListProps = {
-  data: OrderItem[];
+  data: OrderData[];
 };
 
 const OrderList = ({ data }: OrderListProps) => {

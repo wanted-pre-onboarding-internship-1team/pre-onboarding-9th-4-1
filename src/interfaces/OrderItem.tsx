@@ -1,4 +1,4 @@
-type OrderItem = {
+type OrderData = {
   id: number;
   transaction_time: Date;
   status: boolean;
@@ -7,7 +7,7 @@ type OrderItem = {
   currency: number;
 };
 
-type OrderItemDTO = {
+type OrderResponse = {
   id: number;
   transaction_time: string;
   status: boolean;
@@ -16,4 +16,4 @@ type OrderItemDTO = {
   currency: string;
 };
 
-export type { OrderItem, OrderItemDTO };
+export type { OrderData, OrderResponse };

@@ -1,12 +1,12 @@
-import { OrderItem, OrderItemDTO } from '../component/OrderItem';
-import { Api } from './Api';
+import { Api } from '../interfaces/Api';
+import { OrderData, OrderResponse } from '../interfaces/OrderItem';
 
 class MockApi implements Api {
-  async getData(): Promise<OrderItem[]> {
+  async getData(): Promise<OrderData[]> {
     const response = await fetch('/data/mockData.json');
     const data = await response.json();
 
-    const proccessedData = data.map((orderItemDTO: OrderItemDTO) => {
+    const proccessedData = data.map((orderItemDTO: OrderResponse) => {
       return {
         ...orderItemDTO,
         transaction_time: new Date(orderItemDTO.transaction_time),
