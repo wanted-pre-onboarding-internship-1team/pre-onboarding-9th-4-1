@@ -1,8 +1,6 @@
 import MockFooter from '../component/MockFooter';
-import MockList from '../component/MockListContent';
 import MockListContent from '../component/MockListContent';
-import { useMockList, usePagenation } from '../hooks';
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import styled from 'styled-components';
 
 export default function Mainpage() {

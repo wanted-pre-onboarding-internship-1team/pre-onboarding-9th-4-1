@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export default function MockFooter() {
   const { onClickPage, pageList, onClickNextGroup, onClickPrevGroup } =
     usePagenation();
-  console.log(pageList);
 
   return (
     <Container>
