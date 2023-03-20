@@ -1,10 +1,8 @@
 import { Api } from '../api/Api';
-import { OrderItem } from '../component/OrderItem';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 const useOrderData = (api: Api, targetDate: Date) => {
-  const { isLoading, error, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ['orderData'],
     queryFn: () => api.getData(),
   });
