@@ -18,8 +18,6 @@ interface DataListProps {
   data: DataType[];
 }
 
-const Today = '2023-03-08';
-
 export default function DataList({ data }: DataListProps) {
   return (
     <Container>
@@ -32,21 +30,19 @@ export default function DataList({ data }: DataListProps) {
       </ListName>
 
       {data?.map((data: DataType) => {
-        if (data.transaction_time.slice(0, 10) === Today) {
-          return (
-            <div key={data.id}>
-              <ContentContainer>
-                <Content>
-                  <div className='id'>{data.customer_id}</div>
-                  <div className='name'>{data.customer_name}</div>
-                  <div className='price'>{data.currency}</div>
-                  <div className='status'>{String(data.status)}</div>
-                  <div className='cal'>{data.transaction_time}</div>
-                </Content>
-              </ContentContainer>
-            </div>
-          );
-        } else return null;
+        return (
+          <div key={data.id}>
+            <ContentContainer>
+              <Content>
+                <div className='id'>{data.customer_id}</div>
+                <div className='name'>{data.customer_name}</div>
+                <div className='price'>{data.currency}</div>
+                <div className='status'>{String(data.status)}</div>
+                <div className='cal'>{data.transaction_time}</div>
+              </Content>
+            </ContentContainer>
+          </div>
+        );
       })}
     </Container>
   );

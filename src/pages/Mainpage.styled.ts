@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,5 +12,6 @@ export const Container = styled.div`
     margin-right: 5px;
     background-color: white;
     cursor: pointer;
+    margin-bottom: 20px;
   }
 `;

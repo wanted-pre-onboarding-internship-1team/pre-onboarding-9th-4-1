@@ -28,9 +28,11 @@ export const ContentContainer = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
-  text-align: left;
+  text-align: center;
   padding: 3px;
   .id {
+    width: 30px;
+    text-align: center;
   }
   .name {
     width: 150px;

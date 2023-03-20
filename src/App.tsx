@@ -13,8 +13,12 @@ const GlobalStyle = createGlobalStyle`
   
 `;
 function App() {
-  <GlobalStyle />;
-  return <Router />;
+  return (
+    <>
+      <GlobalStyle />;
+      <Router />
+    </>
+  );
 }
 
 export default App;
