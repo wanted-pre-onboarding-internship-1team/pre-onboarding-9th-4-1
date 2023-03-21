@@ -3,6 +3,7 @@ import { COMMON_COLOR } from './../../constants/colors';
 import {
   getCoreRowModel,
   getFilteredRowModel,
+  getFacetedUniqueValues,
   useReactTable,
   flexRender,
   ColumnDef,
@@ -20,6 +21,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
   return (

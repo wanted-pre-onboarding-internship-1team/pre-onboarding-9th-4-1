@@ -35,7 +35,7 @@ const useTableData = (dataList: DataType[]) => {
         dataHeader[key] === '고객이름'
           ? 'includesString'
           : dataHeader[key] === '주문처리상태'
-          ? 'equals'
+          ? 'weakEquals'
           : undefined,
     }));
   }, [dataList]);
