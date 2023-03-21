@@ -1,14 +1,17 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
-type ContextType = { keyword: string };
+type ContextType = {
+  keyword: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 export const SearchContext = createContext<ContextType | undefined>(undefined);
 
-type Props = {
+type PropsType = {
   children: React.ReactNode;
 };
 
-export default function SearchContextProvider({ children }: Props) {
+export default function SearchContextProvider({ children }: PropsType) {
   const [keyword, setKeyword] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

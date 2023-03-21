@@ -26,7 +26,7 @@ export const getTodayDataApi = async (
 };
 
 export const getOriginDataApi = async () => {
-  const { data } = await axios.get<DataType>('/data/mockData.json');
+  const { data } = await axios.get<DataType[]>('/data/mockData.json');
 
   return data;
 };

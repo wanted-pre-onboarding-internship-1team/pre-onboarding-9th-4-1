@@ -1,12 +1,14 @@
+import { useSearchContext } from '../context/SearchContext';
 import { AiOutlineSearch } from 'react-icons/ai';
 import styled from 'styled-components';
 
 const AdminHeader = () => {
+  const { handleChange, keyword } = useSearchContext();
   return (
     <AdminHeaderWrapper>
       <Title>Today's Orders</Title>
       <HeaderRight>
-        <InputBar />
+        <InputBar value={keyword} onChange={handleChange} />
         <AiOutlineSearch className='icon' />
       </HeaderRight>
     </AdminHeaderWrapper>
