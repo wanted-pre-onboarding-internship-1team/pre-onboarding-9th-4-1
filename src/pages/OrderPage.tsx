@@ -9,7 +9,7 @@ export default function OrderPage() {
   const api = new MockApi();
   const checkDate = new Date('2023-03-08');
 
-  const [data] = useOrderData(api, checkDate);
+  const data = useOrderData(api, checkDate);
   const [pageNumber] = usePagenation({ total: data?.length || 0, size: 50 });
   const pageData = splitArray(data, 50);
 

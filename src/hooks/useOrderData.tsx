@@ -14,6 +14,6 @@ const useOrderData = (api: Api, targetDate: Date) => {
     return isSameDate(transaction_time, targetDate);
   });
 
-  return [orderData];
+  return orderData;
 };
 export { useOrderData };
