@@ -33,11 +33,6 @@ const HeaderRight = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  border: 1px solid black;
-  border-radius: 2rem;
-  overflow: hidden;
-  padding: 0.4rem 0.8rem;
-
   .icon {
     font-size: 2rem;
   }
@@ -45,7 +40,6 @@ const HeaderRight = styled.div`
 
 const InputBar = styled.input`
   width: 100%;
-  outline: none;
   border: none;
 `;
 

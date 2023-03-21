@@ -45,7 +45,6 @@ const HeaderRight = styled.div`
 
 const InputBar = styled.input`
   width: 100%;
-  outline: none;
   border: none;
 `;
 

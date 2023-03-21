@@ -5,10 +5,9 @@ const AdminHeader = () => {
   return (
     <AdminHeaderWrapper>
       <Title>Today's Orders</Title>
-      <HeaderRight>
-        <InputBar />
-        <AiOutlineSearch className='icon' />
-      </HeaderRight>
+      <InputBar>
+        <AiOutlineSearch />
+      </InputBar>
     </AdminHeaderWrapper>
   );
 };
@@ -28,25 +27,11 @@ const Title = styled.h2`
 
 //마진라이트 주는 이유가 뭐지?
 
-const HeaderRight = styled.div`
-  width: 60%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  border: 1px solid black;
-  border-radius: 2rem;
-  overflow: hidden;
-  padding: 0.4rem 0.8rem;
-
-  .icon {
-    font-size: 2rem;
-  }
-`;
+const HeaderRight = styled.div``;
 
 const InputBar = styled.input`
-  width: 100%;
-  outline: none;
-  border: none;
+  width: 60%;
+  margin: 0 auto;
 `;
 
 export default AdminHeader;
