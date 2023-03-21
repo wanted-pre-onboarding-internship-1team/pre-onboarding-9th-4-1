@@ -22,7 +22,7 @@ export default function StatusFilter({
   return (
     <StatusContainer isFilterOpen={isFilterOpen}>
       <select onChange={onFilterChange}>
-        <option value='null'>선택 안함</option>
+        <option value=''>선택 안함</option>
         <option value='true'>처리</option>
         <option value='false'>미처리</option>
       </select>

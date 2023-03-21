@@ -37,6 +37,14 @@ const useTableData = (dataList: DataType[]) => {
           : dataHeader[key] === '주문처리상태'
           ? 'weakEquals'
           : undefined,
+      enableSorting:
+        dataHeader[key] === '주문번호' || dataHeader[key] === '거래시간'
+          ? true
+          : false,
+      sortingFn: 'auto',
+      sortDescFirst:
+        (dataHeader[key] === '주문번호' || dataHeader[key] === '거래시간') &&
+        true,
     }));
   }, [dataList]);
 

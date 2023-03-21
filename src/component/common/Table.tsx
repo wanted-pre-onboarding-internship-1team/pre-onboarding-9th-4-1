@@ -4,10 +4,12 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getFacetedUniqueValues,
+  getSortedRowModel,
   useReactTable,
   flexRender,
   ColumnDef,
 } from '@tanstack/react-table';
+import { FaSortUp, FaSortDown, FaSort } from 'react-icons/fa';
 import styled, { css } from 'styled-components';
 
 interface TableProps<T extends object> {
@@ -22,6 +24,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
@@ -30,13 +33,22 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map(header => (
-              <Th key={header.id}>
+              <Th
+                key={header.id}
+                onClick={header.column.getToggleSortingHandler()}>
                 {header.isPlaceholder
                   ? null
                   : flexRender(
                       header.column.columnDef.header,
                       header.getContext()
                     )}
+                {{
+                  asc: <FaSortUp />,
+                  desc: <FaSortDown />,
+                }[header.column.getIsSorted() as string] ?? null}
+                {header.column.getCanSort() && !header.column.getIsSorted() ? (
+                  <FaSort />
+                ) : null}
                 {header.column.getCanFilter() ? (
                   <Filter type={header.id} column={header.column} />
                 ) : null}
