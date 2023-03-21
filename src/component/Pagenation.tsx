@@ -6,8 +6,9 @@ type PagenationProps = {
   total: number;
   size: number;
 };
+
 export default function Pagenation({ total, size }: PagenationProps) {
-  const [pageNumber, pageNumbers, { goPrev, goNext, move }] = usePagenation({
+  const [, pageNumbers, { goPrev, goNext, move }] = usePagenation({
     total,
     size,
   });
