@@ -1,26 +1,12 @@
 import { DataType } from '../types/data.types';
 import axios from 'axios';
 
-export const getDataApi = async (skip: number, limit: number) => {
+export const getTodayDataApi = async (start: number, e: number, s: string) => {
   const response = await axios.get('/data/mockData.json');
-  const begin = skip * limit;
-  const end = skip * limit + limit;
-
-  return response.data.slice(begin, end);
+  return response.data;
 };
 
-export const getTodayDataApi = async (
-  skip: number,
-  limit: number,
-  today: string
-) => {
+export const getDataApi = async (): Promise<DataType[]> => {
   const response = await axios.get('/data/mockData.json');
-  const begin = skip * limit;
-  const end = skip * limit + limit || undefined;
-
-  const filterd = response.data.filter((item: DataType) =>
-    item.transaction_time.includes(today)
-  );
-
-  return filterd.slice(begin, end);
+  return response.data;
 };
