@@ -4,6 +4,11 @@ import { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
 
 const useTableData = (dataList: DataType[]) => {
+  const isSortEnabledColumn = (column: string) => {
+    const enableColumns: string[] = ['id', 'transaction_time'];
+    return enableColumns.includes(column);
+  };
+
   const columns = useMemo<ColumnDef<DataType>[]>(() => {
     if (!dataList) return [];
 
@@ -23,6 +28,8 @@ const useTableData = (dataList: DataType[]) => {
     return Object.keys(dataList[0]).map(key => ({
       header: dataHeader[key],
       accessorKey: key,
+      enableSorting: isSortEnabledColumn(key),
+      sortingFn: 'auto',
       cell: info => {
         const value = info.getValue() as string | number;
         return key === 'status' ? Tag({ value }) : value;

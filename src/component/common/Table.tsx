@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier */
 import { COMMON_COLOR } from './../../constants/colors';
 import {
   getCoreRowModel,
   useReactTable,
   flexRender,
   ColumnDef,
+  getSortedRowModel,
 } from '@tanstack/react-table';
 import styled, { css } from 'styled-components';
 
@@ -17,6 +19,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel()
   });
 
   return (
@@ -24,16 +27,21 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <Th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
+            {headerGroup.headers.map(header => {
+              return (
+                <Th key={header.id}
+                  isSortEnabledColum={header.column.getCanSort()}
+                  onClick={header.column.getToggleSortingHandler()}
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
                       header.column.columnDef.header,
                       header.getContext()
                     )}
-              </Th>
-            ))}
+                </Th>
+              );
+            })}
           </TableRow>
         ))}
       </thead>
@@ -93,14 +101,17 @@ const Cell = css`
   }
 `;
 
-const Th = styled.th`
+const Th = styled.th<{ isSortEnabledColum: boolean }>`
   ${Cell}
-
+  cursor: ${({ isSortEnabledColum }) => isSortEnabledColum ? 'pointer' : 'default'};
   position: sticky;
   top: 0;
   white-space: nowrap;
   background-color: ${COMMON_COLOR.backgroundSection};
   font-weight: 700;
+  &:hover {
+    color :  ${({ isSortEnabledColum }) => isSortEnabledColum ? "blue" : ""};  
+  }
 `;
 
 const Td = styled.td`
