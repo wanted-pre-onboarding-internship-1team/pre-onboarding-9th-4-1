@@ -11,12 +11,13 @@ export default function OrderPage() {
 
   const data = useOrderData(api, checkDate);
   const [pageNumber] = usePagenation({ total: data?.length || 0, size: 50 });
+
   const pageData = splitArray(data, 50);
 
   return (
-    <div>
+    <>
       <OrderList data={pageData[pageNumber]} />
       <Pagenation total={data?.length || 0} size={50} />
-    </div>
+    </>
   );
 }
