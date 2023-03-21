@@ -10,7 +10,7 @@ const useTableData = (dataList: DataType[]) => {
   };
 
   const isFilterEnabledColumn = (column: string) => {
-    const enableColumns: string[] = ['status'];
+    const enableColumns: string[] = ['status', 'customer_name'];
     return enableColumns.includes(column);
   };
   const columns = useMemo<ColumnDef<DataType>[]>(() => {
@@ -36,6 +36,7 @@ const useTableData = (dataList: DataType[]) => {
       enableColumnFilter: isFilterEnabledColumn(key),
       filterFn: 'auto',
       sortingFn: 'auto',
+      footer: key,
       cell: info => {
         const value = info.getValue() as string | number;
         return key === 'status' ? Tag({ value }) : value;

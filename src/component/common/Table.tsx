@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-table';
 import styled, { css } from 'styled-components';
 import { TbSortAscending, TbSortDescending, TbArrowsSort } from 'react-icons/tb';
+import Filter from './Filter';
 
 
 interface TableProps<T extends object> {
@@ -54,15 +55,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
                     <TbArrowsSort />
                   ) : null}
                   {header.column.getCanFilter() ? (
-                    <Select
-                      onChange={({ currentTarget: { value } }) => {
-                        return header.column.setFilterValue(JSON.parse(value))
-                      }}
-                    >
-                      {Array.from(header.column.getFacetedUniqueValues().keys()).map((value) => (
-                        <option key={value}>{value ? "true" : "false"}</option>
-                      ))}
-                    </Select>
+                    <Filter column={header.column} table={table} />
                   ) : null}
                 </Th>
               );
@@ -147,8 +140,5 @@ const Td = styled.td`
   text-align: center;
 `;
 
-const Select = styled.select`
-  background: none;
-`
 
 export default Table;
