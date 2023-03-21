@@ -6,8 +6,12 @@ import {
   flexRender,
   ColumnDef,
   getSortedRowModel,
+  getFilteredRowModel,
+  getFacetedUniqueValues,
 } from '@tanstack/react-table';
 import styled, { css } from 'styled-components';
+import { TbSortAscending, TbSortDescending } from 'react-icons/tb';
+
 
 interface TableProps<T extends object> {
   data: T[];
@@ -19,8 +23,11 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel()
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+
 
   return (
     <TableWrapper>
@@ -38,7 +45,12 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
                     : flexRender(
                       header.column.columnDef.header,
                       header.getContext()
-                    )}
+                    )
+                  }
+                  {{
+                    asc: <TbSortAscending />,
+                    desc: <TbSortDescending />,
+                  }[header.column.getIsSorted() as string] ?? null}
                 </Th>
               );
             })}
@@ -56,7 +68,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
           </TableRow>
         ))}
       </tbody>
-    </TableWrapper>
+    </TableWrapper >
   );
 };
 
