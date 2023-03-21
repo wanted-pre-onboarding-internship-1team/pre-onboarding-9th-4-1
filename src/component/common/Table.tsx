@@ -10,7 +10,7 @@ import {
   getFacetedUniqueValues,
 } from '@tanstack/react-table';
 import styled, { css } from 'styled-components';
-import { TbSortAscending, TbSortDescending } from 'react-icons/tb';
+import { TbSortAscending, TbSortDescending, TbArrowsSort } from 'react-icons/tb';
 
 
 interface TableProps<T extends object> {
@@ -27,7 +27,6 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-
 
   return (
     <TableWrapper>
@@ -51,6 +50,22 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
                     asc: <TbSortAscending />,
                     desc: <TbSortDescending />,
                   }[header.column.getIsSorted() as string] ?? null}
+                  {header.column.getCanSort() && !header.column.getIsSorted() ? (
+                    <TbArrowsSort />
+                  ) : null}
+                  {header.column.getCanFilter() ? (
+                    <select
+                      onChange={({ currentTarget: { value } }) => {
+                        return header.column.setFilterValue(JSON.parse(value))
+                      }}
+                    >
+
+                      {Array.from(header.column.getFacetedUniqueValues().keys()).map((value) => (
+                        <option key={value}>{value ? "true" : "false"}</option>
+                      ))}
+
+                    </select>
+                  ) : null}
                 </Th>
               );
             })}
@@ -71,6 +86,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     </TableWrapper >
   );
 };
+
 
 const TableWrapper = styled.table`
   table-layout: fixed;

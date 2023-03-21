@@ -9,6 +9,10 @@ const useTableData = (dataList: DataType[]) => {
     return enableColumns.includes(column);
   };
 
+  const isFilterEnabledColumn = (column: string) => {
+    const enableColumns: string[] = ['status'];
+    return enableColumns.includes(column);
+  };
   const columns = useMemo<ColumnDef<DataType>[]>(() => {
     if (!dataList) return [];
 
@@ -29,6 +33,8 @@ const useTableData = (dataList: DataType[]) => {
       header: dataHeader[key],
       accessorKey: key,
       enableSorting: isSortEnabledColumn(key),
+      enableColumnFilter: isFilterEnabledColumn(key),
+      filterFn: 'auto',
       sortingFn: 'auto',
       cell: info => {
         const value = info.getValue() as string | number;
