@@ -26,7 +26,7 @@ const useTableData = (dataList: DataType[]) => {
       accessorKey: key,
       cell: info => {
         const value = info.getValue() as string | number;
-        return key === 'status' ? Tag({ value }) : value;
+        return value;
       },
       sortingFn: allowSortKey(key) ? 'datetime' : undefined,
       enableSorting: allowSortKey(key) ? true : false,

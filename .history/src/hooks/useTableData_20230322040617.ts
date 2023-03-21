@@ -17,7 +17,7 @@ const useTableData = (dataList: DataType[]) => {
       transaction_time: '거래시간',
       status: '주문처리상태',
       customer_id: '고객번호',
-      customer_name: '고객이름',
+      customer_name: '<div>123</div>',
       currency: '가격',
     };
 

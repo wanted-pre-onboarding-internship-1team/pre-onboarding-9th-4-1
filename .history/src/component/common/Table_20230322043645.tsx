@@ -1,6 +1,5 @@
 import allowSortKey from '../../utill/sortKey';
 import { COMMON_COLOR } from './../../constants/colors';
-import TableHeader from './TableHeader';
 import {
   getCoreRowModel,
   useReactTable,
@@ -37,7 +36,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map(header => {
-              return <TableHeader key={header.id} header={header} />;
+              return <CustomHeader key={header.id} header={header} />;
             })}
           </TableRow>
         ))}
@@ -57,6 +56,42 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
   );
 };
 
+function CustomHeader<T extends object>({
+  header,
+}: {
+  header: Header<T, unknown>;
+}) {
+  return (
+    <Th
+      key={header.id}
+      onClick={
+        allowSortKey(header.id)
+          ? header.column.getToggleSortingHandler()
+          : undefined
+      }>
+      <TestDiv>
+        {header.column.columnDef.header as string}
+        {typeof header.column.getIsSorted() !== 'boolean' &&
+          {
+            asc: <FaSortUp />,
+            desc: <FaSortDown />,
+          }[header.column.getIsSorted() as SortDirection]}
+        {header.column.getCanSort() && !header.column.getIsSorted() ? (
+          <FaSort />
+        ) : null}
+        {header.column.getCanFilter() ? <span>123</span> : null}
+      </TestDiv>
+    </Th>
+  );
+}
+const TestDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > svg {
+    margin-left: 4px;
+  }
+`;
 const TableWrapper = styled.table`
   table-layout: fixed;
   width: 100%;
@@ -80,7 +115,7 @@ const TableRow = styled.tr`
   }
 `;
 
-const Cell = css`
+export const Cell = css`
   height: 60px;
   margin: 0;
   padding: 5px;

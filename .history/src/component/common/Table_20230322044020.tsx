@@ -57,6 +57,42 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
   );
 };
 
+function CustomHeader<T extends object>({
+  header,
+}: {
+  header: Header<T, unknown>;
+}) {
+  return (
+    <Th
+      key={header.id}
+      onClick={
+        allowSortKey(header.id)
+          ? header.column.getToggleSortingHandler()
+          : undefined
+      }>
+      <TestDiv>
+        {header.column.columnDef.header as string}
+        {typeof header.column.getIsSorted() !== 'boolean' &&
+          {
+            asc: <FaSortUp />,
+            desc: <FaSortDown />,
+          }[header.column.getIsSorted() as SortDirection]}
+        {header.column.getCanSort() && !header.column.getIsSorted() ? (
+          <FaSort />
+        ) : null}
+        {header.column.getCanFilter() ? <span>123</span> : null}
+      </TestDiv>
+    </Th>
+  );
+}
+const TestDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > svg {
+    margin-left: 4px;
+  }
+`;
 const TableWrapper = styled.table`
   table-layout: fixed;
   width: 100%;

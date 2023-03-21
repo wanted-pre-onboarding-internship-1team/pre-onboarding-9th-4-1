@@ -31,7 +31,6 @@ const useTableData = (dataList: DataType[]) => {
       sortingFn: allowSortKey(key) ? 'datetime' : undefined,
       enableSorting: allowSortKey(key) ? true : false,
       enableColumnFilter: key === 'status' ? true : false,
-      filterFn: 'equalsString',
     }));
   }, [dataList]);
 

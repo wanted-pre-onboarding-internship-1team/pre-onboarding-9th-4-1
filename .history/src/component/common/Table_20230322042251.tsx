@@ -1,6 +1,5 @@
 import allowSortKey from '../../utill/sortKey';
 import { COMMON_COLOR } from './../../constants/colors';
-import TableHeader from './TableHeader';
 import {
   getCoreRowModel,
   useReactTable,
@@ -37,7 +36,33 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map(header => {
-              return <TableHeader key={header.id} header={header} />;
+              console.log(header.column.getIsSorted());
+              return (
+                <Th
+                  key={header.id}
+                  onClick={
+                    allowSortKey(header.id)
+                      ? header.column.getToggleSortingHandler()
+                      : undefined
+                  }>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                  {typeof header.column.getIsSorted() !== 'boolean' &&
+                    {
+                      asc: <FaSortUp />,
+                      desc: <FaSortDown />,
+                    }[header.column.getIsSorted() as SortDirection]}
+                  {header.column.getCanSort() &&
+                  !header.column.getIsSorted() ? (
+                    <FaSort />
+                  ) : null}
+                  {header.column.getCanFilter() ? <span>123</span> : null}
+                </Th>
+              );
             })}
           </TableRow>
         ))}
@@ -56,6 +81,35 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     </TableWrapper>
   );
 };
+
+function CustomHeader<T extends object>({
+  header,
+}: {
+  header: Header<T, unknown>;
+}) {
+  return (
+    <Th
+      key={header.id}
+      onClick={
+        allowSortKey(header.id)
+          ? header.column.getToggleSortingHandler()
+          : undefined
+      }>
+      {header.isPlaceholder
+        ? null
+        : flexRender(header.column.columnDef.header, header.getContext())}
+      {typeof header.column.getIsSorted() !== 'boolean' &&
+        {
+          asc: <FaSortUp />,
+          desc: <FaSortDown />,
+        }[header.column.getIsSorted() as SortDirection]}
+      {header.column.getCanSort() && !header.column.getIsSorted() ? (
+        <FaSort />
+      ) : null}
+      {header.column.getCanFilter() ? <span>123</span> : null}
+    </Th>
+  );
+}
 
 const TableWrapper = styled.table`
   table-layout: fixed;
@@ -105,6 +159,13 @@ const Th = styled.th`
   white-space: nowrap;
   background-color: ${COMMON_COLOR.backgroundSection};
   font-weight: 700;
+
+  & > svg {
+    margin-left: 4px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 `;
 
 const Td = styled.td`

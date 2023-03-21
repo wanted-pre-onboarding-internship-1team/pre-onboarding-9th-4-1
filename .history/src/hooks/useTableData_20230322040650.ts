@@ -22,7 +22,7 @@ const useTableData = (dataList: DataType[]) => {
     };
 
     return Object.keys(dataList[0]).map(key => ({
-      header: dataHeader[key],
+      header: '<div>123</div>',
       accessorKey: key,
       cell: info => {
         const value = info.getValue() as string | number;
