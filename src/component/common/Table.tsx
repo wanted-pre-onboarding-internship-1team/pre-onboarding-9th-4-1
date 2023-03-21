@@ -1,6 +1,8 @@
+import NameFilter from '../NameFilter';
 import { COMMON_COLOR } from './../../constants/colors';
 import {
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
   flexRender,
   ColumnDef,
@@ -17,6 +19,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   return (
@@ -32,6 +35,9 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
                       header.column.columnDef.header,
                       header.getContext()
                     )}
+                {header.column.getCanFilter() ? (
+                  <NameFilter column={header.column} />
+                ) : null}
               </Th>
             ))}
           </TableRow>
@@ -76,7 +82,7 @@ const TableRow = styled.tr`
 `;
 
 const Cell = css`
-  height: 60px;
+  height: 80px;
   margin: 0;
   padding: 5px;
   border-bottom: 1px solid ${COMMON_COLOR.border};
@@ -101,6 +107,13 @@ const Th = styled.th`
   white-space: nowrap;
   background-color: ${COMMON_COLOR.backgroundSection};
   font-weight: 700;
+
+  :nth-child(1),
+  :nth-child(2) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 const Td = styled.td`

@@ -27,6 +27,8 @@ const useTableData = (dataList: DataType[]) => {
         const value = info.getValue() as string | number;
         return key === 'status' ? Tag({ value }) : value;
       },
+      enableColumnFilter: dataHeader[key] === '고객이름' ? true : false,
+      filterFn: dataHeader[key] === '고객이름' ? 'includesString' : undefined,
     }));
   }, [dataList]);
 
