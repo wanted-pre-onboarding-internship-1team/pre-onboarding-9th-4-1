@@ -51,8 +51,9 @@ const TableWrapper = styled.table`
 `;
 
 const TableHead = styled.thead`
+  top: 0;
   position: sticky;
-  fornt-weight: bold;
+  font-weight: bold;
   background-color: ${COLORS.orange};
   color: white;
 
