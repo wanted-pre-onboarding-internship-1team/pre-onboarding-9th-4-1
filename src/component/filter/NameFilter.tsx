@@ -10,7 +10,6 @@ export default function NameFilter({
   column: Column<any, any>;
   isFilterOpen: boolean;
 }) {
-  console.log(isFilterOpen);
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     column.setFilterValue(event.target.value);
   };

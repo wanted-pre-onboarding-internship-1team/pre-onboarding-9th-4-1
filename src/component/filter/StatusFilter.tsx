@@ -8,7 +8,5 @@ export default function StatusFilter({
   column: Column<any, any>;
   isFilterOpen: boolean;
 }) {
-  console.log(isFilterOpen);
-
   return <div>StatusFilter</div>;
 }

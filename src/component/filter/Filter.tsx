@@ -13,13 +13,13 @@ export default function Filter({
   type: string;
 }) {
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-  const FILTERS = [
+  const filters = [
     {
-      type: 'customer_name',
+      filterType: 'customer_name',
       content: <NameFilter isFilterOpen={isFilterOpen} column={column} />,
     },
     {
-      type: 'status',
+      filterType: 'status',
       content: <StatusFilter isFilterOpen={isFilterOpen} column={column} />,
     },
   ];
@@ -29,7 +29,7 @@ export default function Filter({
       <FilterButton onClick={() => setIsFilterOpen(!isFilterOpen)}>
         <RiFilter2Fill />
       </FilterButton>
-      {FILTERS.filter(filter => filter.type === type)[0]?.content}
+      {filters.filter(filter => filter.filterType === type)[0].content}
     </>
   );
 }

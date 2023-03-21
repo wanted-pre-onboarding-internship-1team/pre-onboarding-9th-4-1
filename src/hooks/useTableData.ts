@@ -20,8 +20,6 @@ const useTableData = (dataList: DataType[]) => {
       currency: '가격',
     };
 
-    console.log(dataList[0]);
-
     return Object.keys(dataList[0]).map(key => ({
       header: dataHeader[key],
       accessorKey: key,
