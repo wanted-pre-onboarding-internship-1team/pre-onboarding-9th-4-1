@@ -54,17 +54,15 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
                     <TbArrowsSort />
                   ) : null}
                   {header.column.getCanFilter() ? (
-                    <select
+                    <Select
                       onChange={({ currentTarget: { value } }) => {
                         return header.column.setFilterValue(JSON.parse(value))
                       }}
                     >
-
                       {Array.from(header.column.getFacetedUniqueValues().keys()).map((value) => (
                         <option key={value}>{value ? "true" : "false"}</option>
                       ))}
-
-                    </select>
+                    </Select>
                   ) : null}
                 </Th>
               );
@@ -140,6 +138,7 @@ const Th = styled.th<{ isSortEnabledColum: boolean }>`
   &:hover {
     color :  ${({ isSortEnabledColum }) => isSortEnabledColum ? "blue" : ""};  
   }
+  
 `;
 
 const Td = styled.td`
@@ -147,5 +146,9 @@ const Td = styled.td`
 
   text-align: center;
 `;
+
+const Select = styled.select`
+  background: none;
+`
 
 export default Table;
