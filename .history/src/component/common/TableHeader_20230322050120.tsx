@@ -87,7 +87,6 @@ const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
   outline: none;
   background: transparent;
   border: none;
-  cursor: pointer;
   ::before {
     content: '';
     display: block;

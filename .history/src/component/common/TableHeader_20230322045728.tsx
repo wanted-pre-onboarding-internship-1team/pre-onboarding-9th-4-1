@@ -37,11 +37,7 @@ export default function TableHeader<T extends object>({
           <FaSort />
         ) : null}
         {header.column.getCanFilter() ? (
-          <FilterBtn
-            onClick={onChange}
-            tagValue={header.column.getFilterValue() as undefined | boolean}>
-            <div></div>
-          </FilterBtn>
+          <FilterBtn onClick={onChange}></FilterBtn>
         ) : null}
       </Div>
     </Th>
@@ -83,24 +79,4 @@ const Th = styled.th`
   font-weight: 700;
 `;
 
-const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
-  outline: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  ::before {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    ${({ tagValue }) => {
-      if (tagValue === undefined) return;
-      return tagValue
-        ? 'background-color: #42a6ce'
-        : 'background-color: #e2687c';
-    }};
-
-    border: 1px solid black;
-  }
-`;
+const FilterBtn = styled.button``;

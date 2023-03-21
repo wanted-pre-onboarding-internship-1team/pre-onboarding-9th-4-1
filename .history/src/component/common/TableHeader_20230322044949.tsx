@@ -1,7 +1,6 @@
 import { COMMON_COLOR } from '../../constants/colors';
 import allowSortKey from '../../utill/sortKey';
 import { SortDirection, Header } from '@tanstack/react-table';
-import { useState } from 'react';
 import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 import styled, { css } from 'styled-components';
 
@@ -10,13 +9,9 @@ export default function TableHeader<T extends object>({
 }: {
   header: Header<T, unknown>;
 }) {
-  //console.log(header.column.getFacetedUniqueValues().keys());
-  const filterStatus = useState(header.column.getFilterValue());
-  console.log(header.column.getFilterValue());
+  console.log(header.column.getFacetedUniqueValues().keys());
   const onChange = () => {
-    header.column.getFilterValue()
-      ? header.column.setFilterValue(false)
-      : header.column.setFilterValue(true);
+    header.column.setFilterValue(false);
   };
   return (
     <Th
@@ -37,11 +32,7 @@ export default function TableHeader<T extends object>({
           <FaSort />
         ) : null}
         {header.column.getCanFilter() ? (
-          <FilterBtn
-            onClick={onChange}
-            tagValue={header.column.getFilterValue() as undefined | boolean}>
-            <div></div>
-          </FilterBtn>
+          <span onClick={onChange}>123</span>
         ) : null}
       </Div>
     </Th>
@@ -81,26 +72,4 @@ const Th = styled.th`
   white-space: nowrap;
   background-color: ${COMMON_COLOR.backgroundSection};
   font-weight: 700;
-`;
-
-const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
-  outline: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  ::before {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    ${({ tagValue }) => {
-      if (tagValue === undefined) return;
-      return tagValue
-        ? 'background-color: #42a6ce'
-        : 'background-color: #e2687c';
-    }};
-
-    border: 1px solid black;
-  }
 `;

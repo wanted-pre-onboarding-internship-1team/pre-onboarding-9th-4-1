@@ -39,7 +39,7 @@ export default function TableHeader<T extends object>({
         {header.column.getCanFilter() ? (
           <FilterBtn
             onClick={onChange}
-            tagValue={header.column.getFilterValue() as undefined | boolean}>
+            tagValue={header.column.getFilterValue()}>
             <div></div>
           </FilterBtn>
         ) : null}
@@ -83,11 +83,10 @@ const Th = styled.th`
   font-weight: 700;
 `;
 
-const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
+const FilterBtn = styled.button`
   outline: none;
   background: transparent;
   border: none;
-  cursor: pointer;
   ::before {
     content: '';
     display: block;
@@ -95,12 +94,9 @@ const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
     height: 8px;
     border-radius: 50%;
     ${({ tagValue }) => {
-      if (tagValue === undefined) return;
-      return tagValue
+      return tagValue === 'true'
         ? 'background-color: #42a6ce'
         : 'background-color: #e2687c';
     }};
-
-    border: 1px solid black;
   }
 `;

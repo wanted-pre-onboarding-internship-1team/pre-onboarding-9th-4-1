@@ -87,7 +87,6 @@ const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
   outline: none;
   background: transparent;
   border: none;
-  cursor: pointer;
   ::before {
     content: '';
     display: block;
@@ -100,7 +99,5 @@ const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
         ? 'background-color: #42a6ce'
         : 'background-color: #e2687c';
     }};
-
-    border: 1px solid black;
   }
 `;

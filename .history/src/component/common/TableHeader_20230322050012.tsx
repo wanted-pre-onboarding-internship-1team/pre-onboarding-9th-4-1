@@ -87,7 +87,6 @@ const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
   outline: none;
   background: transparent;
   border: none;
-  cursor: pointer;
   ::before {
     content: '';
     display: block;
@@ -95,12 +94,9 @@ const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
     height: 8px;
     border-radius: 50%;
     ${({ tagValue }) => {
-      if (tagValue === undefined) return;
-      return tagValue
+      return tagValue === 'true'
         ? 'background-color: #42a6ce'
         : 'background-color: #e2687c';
     }};
-
-    border: 1px solid black;
   }
 `;
