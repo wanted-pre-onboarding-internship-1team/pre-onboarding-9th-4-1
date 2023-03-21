@@ -1,4 +1,4 @@
-import NameFilter from '../NameFilter';
+import Filter from '../filter/Filter';
 import { COMMON_COLOR } from './../../constants/colors';
 import {
   getCoreRowModel,
@@ -27,19 +27,22 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <Th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                {header.column.getCanFilter() ? (
-                  <NameFilter column={header.column} />
-                ) : null}
-              </Th>
-            ))}
+            {headerGroup.headers.map(header => {
+              console.log(header);
+              return (
+                <Th key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                  {header.column.getCanFilter() ? (
+                    <Filter type={header.id} column={header.column} />
+                  ) : null}
+                </Th>
+              );
+            })}
           </TableRow>
         ))}
       </thead>

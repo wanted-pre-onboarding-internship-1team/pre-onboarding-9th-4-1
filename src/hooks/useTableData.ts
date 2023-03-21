@@ -20,6 +20,8 @@ const useTableData = (dataList: DataType[]) => {
       currency: '가격',
     };
 
+    console.log(dataList[0]);
+
     return Object.keys(dataList[0]).map(key => ({
       header: dataHeader[key],
       accessorKey: key,
@@ -27,8 +29,16 @@ const useTableData = (dataList: DataType[]) => {
         const value = info.getValue() as string | number;
         return key === 'status' ? Tag({ value }) : value;
       },
-      enableColumnFilter: dataHeader[key] === '고객이름' ? true : false,
-      filterFn: dataHeader[key] === '고객이름' ? 'includesString' : undefined,
+      enableColumnFilter:
+        dataHeader[key] === '고객이름' || dataHeader[key] === '주문처리상태'
+          ? true
+          : false,
+      filterFn:
+        dataHeader[key] === '고객이름'
+          ? 'includesString'
+          : dataHeader[key] === '주문처리상태'
+          ? 'equals'
+          : undefined,
     }));
   }, [dataList]);
 
