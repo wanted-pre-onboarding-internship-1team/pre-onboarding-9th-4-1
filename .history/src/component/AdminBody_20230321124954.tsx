@@ -1,4 +1,3 @@
-import useSearchQuery from '../hooks/useSearchQuery';
 import { COMMON_COLOR } from './../constants/colors';
 import useTableData from './../hooks/useTableData';
 import useTableQuery from './../hooks/useTableQuery';
@@ -7,7 +6,6 @@ import styled from 'styled-components';
 
 const AdminBody = () => {
   const { getData, error, isLoading } = useTableQuery();
-  const { getData: searchData } = useSearchQuery();
   const { columns, data } = useTableData(getData);
 
   if (isLoading) return <AdminBodyWrapper>로딩 중입니다⏳</AdminBodyWrapper>;
