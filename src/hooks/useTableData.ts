@@ -27,6 +27,7 @@ const useTableData = (dataList: DataType[]) => {
         const value = info.getValue() as string | number;
         return key === 'status' ? Tag({ value }) : value;
       },
+      enableSorting: key === 'id' || key === 'transaction_time',
     }));
   }, [dataList]);
 

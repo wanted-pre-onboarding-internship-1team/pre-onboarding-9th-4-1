@@ -4,7 +4,9 @@ import {
   useReactTable,
   flexRender,
   ColumnDef,
+  getSortedRowModel,
 } from '@tanstack/react-table';
+import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
 import styled, { css } from 'styled-components';
 
 interface TableProps<T extends object> {
@@ -17,6 +19,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
@@ -26,12 +29,26 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map(header => (
               <Th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
+                {header.isPlaceholder ? null : (
+                  <div
+                    {...{
+                      isCanSort: header.column.getCanSort(),
+                      onClick: header.column.getToggleSortingHandler(),
+                    }}>
+                    {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
                     )}
+                    {{
+                      asc: <FaSortUp />,
+                      desc: <FaSortDown />,
+                    }[header.column.getIsSorted() as string] ?? null}
+                    {header.column.getCanSort() &&
+                    !header.column.getIsSorted() ? (
+                      <FaSort />
+                    ) : null}
+                  </div>
+                )}
               </Th>
             ))}
           </TableRow>
