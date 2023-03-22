@@ -14,12 +14,14 @@ const TableFilter = ({ column }: { column: Column<any, unknown> }) => {
 
   const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
+    if (!value.length) return;
     column.setFilterValue(JSON.parse(value));
     setParams(JSON.parse(value));
   };
 
   return (
     <Select name={column.id + 'List'} onChange={onChangeHandler}>
+      <option value=''>선택</option>
       {sortedUniqueValues.map((value: string, idx: number) => (
         <option value={value} key={idx}>
           {String(value)}
