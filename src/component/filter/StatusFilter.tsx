@@ -11,9 +11,10 @@ export default function StatusFilter({
   isFilterOpen: boolean;
 }) {
   const onFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.preventDefault();
     const { value } = event.target;
     if (value === '') {
-      column.setFilterValue(null);
+      column.setFilterValue('');
     } else {
       column.setFilterValue(JSON.parse(value));
     }
