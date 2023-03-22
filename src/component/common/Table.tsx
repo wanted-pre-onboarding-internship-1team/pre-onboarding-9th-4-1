@@ -5,6 +5,7 @@ import {
   flexRender,
   ColumnDef,
   getSortedRowModel,
+  getFilteredRowModel,
 } from '@tanstack/react-table';
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
 import styled, { css } from 'styled-components';
@@ -20,8 +21,19 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
+  const handleFilterStatus = (header: any) => {
+    switch (header.column.getFilterValue()) {
+      case true:
+        return header.column.setFilterValue(false);
+      case false:
+        return header.column.setFilterValue(undefined);
+      case undefined:
+        return header.column.setFilterValue(true);
+    }
+  };
   return (
     <TableWrapper>
       <thead>
@@ -29,26 +41,35 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map(header => (
               <Th key={header.id}>
-                {header.isPlaceholder ? null : (
-                  <div
-                    {...{
-                      isCanSort: header.column.getCanSort(),
-                      onClick: header.column.getToggleSortingHandler(),
-                    }}>
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                    {{
-                      asc: <FaSortUp />,
-                      desc: <FaSortDown />,
-                    }[header.column.getIsSorted() as string] ?? null}
-                    {header.column.getCanSort() &&
-                    !header.column.getIsSorted() ? (
-                      <FaSort />
-                    ) : null}
-                  </div>
-                )}
+                <div
+                  {...{
+                    isCanSort: header.column.getCanSort(),
+                    isCanFilter: header.column.getCanFilter(),
+                    onClick: header.column.getToggleSortingHandler(),
+                  }}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                  {{
+                    asc: <FaSortUp />,
+                    desc: <FaSortDown />,
+                  }[header.column.getIsSorted() as string] ?? null}
+                  {header.column.getCanSort() &&
+                  !header.column.getIsSorted() ? (
+                    <FaSort />
+                  ) : null}
+                </div>
+                {header.column.getCanFilter() ? (
+                  <FilterBtn
+                    onClick={() => handleFilterStatus(header)}
+                    tagValue={
+                      header.column.getFilterValue() as undefined | boolean
+                    }
+                  />
+                ) : null}
               </Th>
             ))}
           </TableRow>
@@ -99,7 +120,6 @@ const Cell = css`
   border-bottom: 1px solid ${COMMON_COLOR.border};
   vertical-align: middle;
   font-size: 1.4rem;
-
   :last-child {
     padding-right: 36px;
     border-right: 0;
@@ -125,5 +145,23 @@ const Td = styled.td`
 
   text-align: center;
 `;
-
+const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  ::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    ${({ tagValue }) => {
+      if (tagValue === undefined) return '    border: 1px solid gray;';
+      return tagValue
+        ? 'background-color: #42a6ce'
+        : 'background-color: #e2687c';
+    }};
+  }
+`;
 export default Table;
