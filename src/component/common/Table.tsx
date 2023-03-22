@@ -7,6 +7,7 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table';
+import { BiSearchAlt } from 'react-icons/bi';
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
 import styled, { css } from 'styled-components';
 
@@ -34,6 +35,11 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
         return header.column.setFilterValue(true);
     }
   };
+  const handleSearchName =
+    (header: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      header.column.setFilterValue(e.target.value);
+    };
+
   return (
     <TableWrapper>
       <thead>
@@ -63,12 +69,23 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
                   ) : null}
                 </div>
                 {header.column.getCanFilter() ? (
-                  <FilterBtn
-                    onClick={() => handleFilterStatus(header)}
-                    tagValue={
-                      header.column.getFilterValue() as undefined | boolean
-                    }
-                  />
+                  header.id === 'status' ? (
+                    <FilterBtn
+                      onClick={() => handleFilterStatus(header)}
+                      tagValue={
+                        header.column.getFilterValue() as undefined | boolean
+                      }
+                    />
+                  ) : header.id === 'customer_name' ? (
+                    <FilterInput>
+                      <InputBar
+                        type='text'
+                        placeholder='고객 이름 검색'
+                        onChange={handleSearchName(header)}
+                      />
+                      <BiSearchAlt size='17' />
+                    </FilterInput>
+                  ) : null
                 ) : null}
               </Th>
             ))}
@@ -163,5 +180,18 @@ const FilterBtn = styled.button<{ tagValue: undefined | boolean }>`
         : 'background-color: #e2687c';
     }};
   }
+`;
+const FilterInput = styled.div`
+  width: 62%;
+  display: flex;
+  margin: 0 auto;
+  border: 1px solid gray;
+  border-radius: 2rem;
+  padding: 0.3rem 0.7rem;
+`;
+const InputBar = styled.input`
+  width: 100%;
+  outline: none;
+  border: none;
 `;
 export default Table;

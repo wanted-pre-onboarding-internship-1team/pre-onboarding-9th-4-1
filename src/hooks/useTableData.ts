@@ -28,8 +28,13 @@ const useTableData = (dataList: DataType[]) => {
         return key === 'status' ? Tag({ value }) : value;
       },
       enableSorting: key === 'id' || key === 'transaction_time',
-      enableColumnFilter: key === 'status',
-      filterFn: key === 'status' ? 'equals' : undefined,
+      enableColumnFilter: key === 'status' || key === 'customer_name',
+      filterFn:
+        key === 'status'
+          ? 'equals'
+          : key === 'customer_name'
+          ? 'includesString'
+          : undefined,
     }));
   }, [dataList]);
 
