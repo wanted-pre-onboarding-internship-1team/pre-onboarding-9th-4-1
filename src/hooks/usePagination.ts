@@ -4,7 +4,7 @@ const usePagination = (
   setPage: (v: number) => void
 ) => {
   const start = currentPage - (currentPage % 5);
-  const end = start + 4 > maxPage - 1 ? maxPage - 1 : start + 4;
+  const end = start + 4 >= maxPage ? maxPage - 1 : start + 4;
 
   const goPrev = () => {
     setPage(start - 1);
@@ -18,7 +18,7 @@ const usePagination = (
     setPage(num);
   };
 
-  const numList = new Array(end - start + 1)
+  const numList = new Array(Math.max(end - start, start - end) + 1)
     .fill(0)
     .map((_, idx) => idx + start);
 

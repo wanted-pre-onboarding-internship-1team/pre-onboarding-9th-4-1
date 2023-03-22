@@ -1,7 +1,8 @@
+import { MAX_NUM } from '../constants/orders';
 import { COMMON_COLOR } from './../constants/colors';
 import useTableData from './../hooks/useTableData';
 import useTableQuery from './../hooks/useTableQuery';
-import Table from './common/Table';
+import Table from './table/Table';
 import styled from 'styled-components';
 
 const AdminBody = () => {
@@ -14,7 +15,7 @@ const AdminBody = () => {
 
   return (
     <AdminBodyWrapper>
-      <Table data={data} columns={columns} />
+      <Table data={data} columns={columns} pageSize={MAX_NUM} />
     </AdminBodyWrapper>
   );
 };

@@ -20,9 +20,11 @@ const useTableData = (dataList: DataType[]) => {
       currency: '가격',
     };
 
-    return Object.keys(dataList[0]).map(key => ({
+    return Object.keys(dataHeader).map(key => ({
       header: dataHeader[key],
       accessorKey: key,
+      enableSorting: key === 'id' || key === 'transaction_time',
+      enableColumnFilter: key === 'status',
       cell: info => {
         const value = info.getValue() as string | number;
         return key === 'status' ? Tag({ value }) : value;
