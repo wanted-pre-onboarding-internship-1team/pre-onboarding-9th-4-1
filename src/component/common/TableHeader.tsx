@@ -10,14 +10,17 @@ export default function TableHeader<T extends object>({
 }: {
   header: Header<T, unknown>;
 }) {
-  const { keyword } = useSearchContext();
   const onChange = () => {
-    keyword && header.column.setFilterValue(undefined);
-
-    header.column.getFilterValue()
-      ? header.column.setFilterValue(false)
-      : header.column.setFilterValue(true);
+    switch (header.column.getFilterValue()) {
+      case true:
+        return header.column.setFilterValue(false);
+      case false:
+        return header.column.setFilterValue(undefined);
+      case undefined:
+        return header.column.setFilterValue(true);
+    }
   };
+
   return (
     <Th
       key={header.id}
