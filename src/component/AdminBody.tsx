@@ -6,16 +6,12 @@ import Table from './common/Table';
 import styled from 'styled-components';
 
 const AdminBody = () => {
-  const { getData, error, isLoading } = useTableQuery();
+  const { getData } = useTableQuery();
   const { getData: searchData } = useSearchQuery();
 
   const { columns, data } = useTableData(
     searchData && searchData.length > 0 ? searchData : getData
   );
-
-  if (isLoading) return <AdminBodyWrapper>로딩 중입니다⏳</AdminBodyWrapper>;
-
-  if (error) return <AdminBodyWrapper>오류가 발생했습니다🚨</AdminBodyWrapper>;
 
   return (
     <AdminBodyWrapper>

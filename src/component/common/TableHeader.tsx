@@ -50,6 +50,7 @@ const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   & > svg {
     margin-left: 4px;
   }
