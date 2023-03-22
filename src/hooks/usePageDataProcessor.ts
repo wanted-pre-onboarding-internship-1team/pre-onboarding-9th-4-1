@@ -3,10 +3,14 @@ import { DataType, DataTypeKey } from '../types/data.types';
 import { splitArray } from '../units/splitArray';
 import useAdminParams from './useAdminParams';
 
-const usePageDataProcessor = (data: DataType[], today: string) => {
+const usePageDataProcessor = (
+  data: DataType[],
+  today: string
+): [DataType[][], string, number, number] => {
   const { currentParams: isDone } = useAdminParams('status');
   const { currentParams: searchQuery } = useAdminParams('search');
   const { currentParams: sortOption } = useAdminParams('sort');
+  const { currentParams: currentPage } = useAdminParams('page');
 
   const defalutValue = '0';
   const sortKey: DataTypeKey =
@@ -24,9 +28,11 @@ const usePageDataProcessor = (data: DataType[], today: string) => {
       return order1[sortKey] < order2[sortKey] ? -1 : 1;
     });
 
+  const length = proccedData.length;
   const pageDatas = splitArray(proccedData, MAX_NUM);
+  const maxPage = pageDatas.length;
 
-  return pageDatas;
+  return [pageDatas, currentPage, maxPage, length];
 };
 
 export { usePageDataProcessor };

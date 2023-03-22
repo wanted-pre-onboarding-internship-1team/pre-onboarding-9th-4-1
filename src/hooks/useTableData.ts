@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 
 const useTableData = (dataList: DataType[]) => {
   const columns = useMemo<ColumnDef<DataType>[]>(() => {
-    console.log('datalist=', dataList);
     if (!dataList || dataList.length === 0) return [];
 
     type DataHeaderType = {
