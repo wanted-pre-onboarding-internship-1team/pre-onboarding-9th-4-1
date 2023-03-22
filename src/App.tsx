@@ -8,6 +8,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 5000,
       refetchInterval: 5000,
+      suspense: true,
     },
   },
 });
