@@ -8,13 +8,13 @@ const useTableQuery = () => {
   const { currentPage, maxPage } = usePage();
   const queryClient = useQueryClient();
 
-  const {
-    isLoading,
-    error,
-    data: getData,
-  } = useQuery(['data', currentPage], () => {
-    return getTodayDataApi(currentPage, MAX_NUM, TODAY);
-  });
+  const { data: getData } = useQuery(
+    ['data', currentPage],
+    () => {
+      return getTodayDataApi(currentPage, MAX_NUM, TODAY);
+    },
+    { suspense: true }
+  );
 
   useEffect(() => {
     if (currentPage <= maxPage - 2) {
@@ -26,7 +26,7 @@ const useTableQuery = () => {
     }
   }, [currentPage, queryClient]);
 
-  return { getData, error, isLoading };
+  return { getData };
 };
 
 export default useTableQuery;

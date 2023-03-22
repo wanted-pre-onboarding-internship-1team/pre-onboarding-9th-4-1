@@ -1,9 +1,13 @@
 import { COMMON_COLOR } from './../../constants/colors';
+import TableHeader from './TableHeader';
 import {
   getCoreRowModel,
   useReactTable,
   flexRender,
   ColumnDef,
+  getSortedRowModel,
+  getFilteredRowModel,
+  getFacetedUniqueValues,
 } from '@tanstack/react-table';
 import styled, { css } from 'styled-components';
 
@@ -17,6 +21,9 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
   return (
@@ -24,16 +31,9 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <Th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-              </Th>
-            ))}
+            {headerGroup.headers.map(header => {
+              return <TableHeader key={header.id} header={header} />;
+            })}
           </TableRow>
         ))}
       </thead>
@@ -95,7 +95,6 @@ const Cell = css`
 
 const Th = styled.th`
   ${Cell}
-
   position: sticky;
   top: 0;
   white-space: nowrap;

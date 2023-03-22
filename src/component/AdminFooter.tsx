@@ -1,14 +1,18 @@
 import { MAX_NUM } from '../constants/orders';
 import usePage from '../hooks/usePage';
+import useSearchQuery from '../hooks/useSearchQuery';
 import { COMMON_COLOR } from './../constants/colors';
 import Pagination from './common/Pagination';
 import styled from 'styled-components';
 
 const AdminFooter = () => {
   const { currentPage, maxPage, length } = usePage();
+  const { getData } = useSearchQuery();
 
   const from = currentPage * MAX_NUM + 1;
   const to = from + MAX_NUM < length ? from + MAX_NUM : length;
+
+  if (getData?.length !== 0) return null;
 
   return (
     <AdminFooterWrapper>

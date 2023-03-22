@@ -1,3 +1,4 @@
+import allowSortKey from '../utill/sortKey';
 import Tag from './../component/common/Tag';
 import { DataType } from './../types/data.types';
 import { ColumnDef } from '@tanstack/react-table';
@@ -27,6 +28,10 @@ const useTableData = (dataList: DataType[]) => {
         const value = info.getValue() as string | number;
         return key === 'status' ? Tag({ value }) : value;
       },
+      sortingFn: allowSortKey(key) ? 'datetime' : undefined,
+      enableSorting: allowSortKey(key) ? true : false,
+      enableColumnFilter: key === 'status' ? true : false,
+      filterFn: 'equals',
     }));
   }, [dataList]);
 

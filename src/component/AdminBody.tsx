@@ -1,3 +1,4 @@
+import useSearchQuery from '../hooks/useSearchQuery';
 import { COMMON_COLOR } from './../constants/colors';
 import useTableData from './../hooks/useTableData';
 import useTableQuery from './../hooks/useTableQuery';
@@ -5,12 +6,12 @@ import Table from './common/Table';
 import styled from 'styled-components';
 
 const AdminBody = () => {
-  const { getData, error, isLoading } = useTableQuery();
-  const { columns, data } = useTableData(getData);
+  const { getData } = useTableQuery();
+  const { getData: searchData } = useSearchQuery();
 
-  if (isLoading) return <AdminBodyWrapper>로딩 중입니다⏳</AdminBodyWrapper>;
-
-  if (error) return <AdminBodyWrapper>오류가 발생했습니다🚨</AdminBodyWrapper>;
+  const { columns, data } = useTableData(
+    searchData && searchData.length > 0 ? searchData : getData
+  );
 
   return (
     <AdminBodyWrapper>
