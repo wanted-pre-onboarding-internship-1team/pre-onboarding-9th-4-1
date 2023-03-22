@@ -6,11 +6,12 @@ import useAdminParams from './useAdminParams';
 const usePageDataProcessor = (
   data: DataType[],
   today: string
-): [DataType[][], string, number, number] => {
+): [DataType[][], number, number, number] => {
   const { currentParams: isDone } = useAdminParams('status');
   const { currentParams: searchQuery } = useAdminParams('search');
   const { currentParams: sortOption } = useAdminParams('sort');
-  const { currentParams: currentPage } = useAdminParams('page');
+  const { currentParams: curPageString } = useAdminParams('page');
+  const currentPage = Number(curPageString);
 
   const defalutValue = '0';
   const sortKey: DataTypeKey =

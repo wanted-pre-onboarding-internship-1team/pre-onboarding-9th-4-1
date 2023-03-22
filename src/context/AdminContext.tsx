@@ -8,24 +8,47 @@ type ProviderProps = {
   children: ReactNode;
 };
 
-type Value = {
-  pageData: DataType[][];
-  limit: number;
+type AdminContextStat = {
+  isLoading: boolean;
+  error: unknown;
 };
-const defaultValue: Value = { pageData: [[]], limit: 0 };
+
+type AdminContextPage = {
+  currentPage: number;
+  maxPage: number;
+  length: number;
+  itemPerPage: number;
+};
+
+type AdminContextValue = {
+  status: AdminContextStat;
+  data: DataType[][];
+  page: AdminContextPage;
+};
+
+const defaultValue: AdminContextValue = {
+  status: { isLoading: true, error: false },
+  data: [[]],
+  page: { currentPage: 0, maxPage: 0, length: 0, itemPerPage: MAX_NUM },
+};
 
 const AdminContext = createContext(defaultValue);
 
 const AdminDataProvider = ({ children }: ProviderProps) => {
-  const { response } = useTableQuery();
+  const { response, isLoading, error } = useTableQuery();
   const [pageDatas, currentPage, maxPage, length] = usePageDataProcessor(
     response,
     TODAY
   );
+
+  const adminDatas: AdminContextValue = {
+    status: { isLoading, error },
+    data: pageDatas,
+    page: { currentPage, maxPage, length, itemPerPage: MAX_NUM },
+  };
+
   return (
-    <AdminContext.Provider value={{ pageData: pageDatas, limit: MAX_NUM }}>
-      {children}
-    </AdminContext.Provider>
+    <AdminContext.Provider value={adminDatas}>{children}</AdminContext.Provider>
   );
 };
 
