@@ -7,9 +7,10 @@ import styled from 'styled-components';
 
 const AdminBody = () => {
   const { getData, error, isLoading } = useTableQuery();
-  const { getData: searchData = [] } = useSearchQuery();
+  const { getData: searchData } = useSearchQuery();
+
   const { columns, data } = useTableData(
-    searchData.length > 0 ? searchData : getData
+    searchData && searchData.length > 0 ? searchData : getData
   );
 
   if (isLoading) return <AdminBodyWrapper>로딩 중입니다⏳</AdminBodyWrapper>;

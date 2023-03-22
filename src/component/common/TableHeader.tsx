@@ -1,7 +1,7 @@
 import { COMMON_COLOR } from '../../constants/colors';
+import { useSearchContext } from '../../context/SearchContext';
 import allowSortKey from '../../utill/sortKey';
 import { SortDirection, Header } from '@tanstack/react-table';
-import { useState } from 'react';
 import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 import styled, { css } from 'styled-components';
 
@@ -10,7 +10,10 @@ export default function TableHeader<T extends object>({
 }: {
   header: Header<T, unknown>;
 }) {
+  const { keyword } = useSearchContext();
   const onChange = () => {
+    keyword && header.column.setFilterValue(undefined);
+
     header.column.getFilterValue()
       ? header.column.setFilterValue(false)
       : header.column.setFilterValue(true);

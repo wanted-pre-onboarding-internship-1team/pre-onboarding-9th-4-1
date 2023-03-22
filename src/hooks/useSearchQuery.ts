@@ -9,8 +9,9 @@ export default function useSearchQuery() {
     error,
     data: getData,
   } = useQuery(['data', 'origin'], getOriginDataApi);
+
   const { keyword } = useSearchContext();
-  let searchiedData: DataType[] | null = null;
+  let searchiedData: DataType[] = [];
 
   if (keyword !== '' && getData) {
     searchiedData = getData.filter(item => {
@@ -18,7 +19,6 @@ export default function useSearchQuery() {
       return regex.test(item.customer_name);
     });
   }
-  console.log('keyword', keyword);
-  console.log(searchiedData);
-  return { getData: searchiedData || getData, error, isLoading };
+
+  return { getData: searchiedData, error, isLoading };
 }
