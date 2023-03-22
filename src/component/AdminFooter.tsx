@@ -1,11 +1,12 @@
 import { MAX_NUM } from '../constants/orders';
-import usePage from '../hooks/usePage';
+import { useAdminContext } from '../context/AdminContext';
 import { COMMON_COLOR } from './../constants/colors';
 import Pagination from './common/Pagination';
 import styled from 'styled-components';
 
 const AdminFooter = () => {
-  const { currentPage, maxPage, length } = usePage();
+  const { page } = useAdminContext();
+  const { currentPage, maxPage, length } = page;
 
   const from = currentPage * MAX_NUM + 1;
   const to = from + MAX_NUM < length ? from + MAX_NUM : length;

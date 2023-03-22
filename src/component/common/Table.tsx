@@ -10,6 +10,7 @@ import styled, { css } from 'styled-components';
 interface TableProps<T extends object> {
   data: T[];
   columns: ColumnDef<T>[];
+  onHeaderClick: () => void;
 }
 
 const Table = <T extends object>({ data, columns }: TableProps<T>) => {

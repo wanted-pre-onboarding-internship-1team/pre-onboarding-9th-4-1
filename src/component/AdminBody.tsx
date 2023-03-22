@@ -1,15 +1,18 @@
-import { TODAY } from '../constants/orders';
-import { usePageDataProcessor } from '../hooks/usePageDataProcessor';
+import { useAdminContext } from '../context/AdminContext';
 import { COMMON_COLOR } from './../constants/colors';
 import useTableData from './../hooks/useTableData';
-import useTableQuery from './../hooks/useTableQuery';
 import Table from './common/Table';
 import styled from 'styled-components';
 
 const AdminBody = () => {
-  const { response, error, isLoading } = useTableQuery();
-  const [pageDatas, currentPage] = usePageDataProcessor(response, TODAY);
+  const { status, data: pageDatas, page } = useAdminContext();
+  const { error, isLoading } = status;
+  const { currentPage } = page;
+
   const { columns, data } = useTableData(pageDatas[currentPage]);
+  const handleChange = () => {
+    const a = 1;
+  };
 
   if (isLoading) return <AdminBodyWrapper>로딩 중입니다⏳</AdminBodyWrapper>;
 
@@ -17,7 +20,8 @@ const AdminBody = () => {
 
   return (
     <AdminBodyWrapper>
-      <Table data={data} columns={columns} />
+      <input />
+      <Table data={data} columns={columns} onHeaderClick={handleChange} />
     </AdminBodyWrapper>
   );
 };
