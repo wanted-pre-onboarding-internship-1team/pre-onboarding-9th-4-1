@@ -40,7 +40,6 @@ const AdminBody = () => {
   if (error) return <AdminBodyWrapper>오류가 발생했습니다🚨</AdminBodyWrapper>;
 
   const onchangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setInputName(event.target.value);
   };
 
