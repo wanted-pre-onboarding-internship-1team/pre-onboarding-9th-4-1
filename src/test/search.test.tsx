@@ -12,7 +12,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 jest.mock('axios');
 
 describe('검색', () => {
-  test('Ignacia Hood 이름 검색하기', async () => {
+  beforeEach(async () => {
     (axios.get as jest.Mock).mockResolvedValue({
       data: orders,
     });
@@ -24,7 +24,9 @@ describe('검색', () => {
         )
       );
     });
+  });
 
+  test('Ignacia Hood 이름 검색하기', async () => {
     //이름 입력
     await act(async () => {
       const inputText = screen.getByTestId('search-box');
@@ -37,18 +39,6 @@ describe('검색', () => {
   });
 
   test('존재하지 않는 이름 검색하기', async () => {
-    (axios.get as jest.Mock).mockResolvedValue({
-      data: orders,
-    });
-
-    await act(async () => {
-      render(
-        withAllContexts(
-          withRouter(<Route path='/' element={<Mainpage />} />, '/')
-        )
-      );
-    });
-
     //이름 입력
     await act(async () => {
       const inputText = screen.getByTestId('search-box');
