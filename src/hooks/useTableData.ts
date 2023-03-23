@@ -4,13 +4,13 @@ import { DataType } from './../types/data.types';
 import { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
 
+type DataHeaderType = {
+  [index: string]: string;
+};
+
 const useTableData = (dataList: DataType[]) => {
   const columns = useMemo<ColumnDef<DataType>[]>(() => {
     if (!dataList) return [];
-
-    type DataHeaderType = {
-      [index: string]: string;
-    };
 
     const dataHeader: DataHeaderType = {
       id: '주문번호',
@@ -32,6 +32,7 @@ const useTableData = (dataList: DataType[]) => {
       enableSorting: allowSortKey(key) ? true : false,
       enableColumnFilter: key === 'status' ? true : false,
       filterFn: 'equals',
+      sortDescFirst: true,
     }));
   }, [dataList]);
 
