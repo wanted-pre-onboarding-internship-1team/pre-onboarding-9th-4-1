@@ -43,6 +43,7 @@ export default function TableHeader<T extends object>({
           <FilterBtn
             onClick={onChange}
             tagValue={header.column.getFilterValue() as undefined | boolean}
+            data-testid='filterBtn'
           />
         ) : null}
       </Div>

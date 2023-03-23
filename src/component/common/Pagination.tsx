@@ -10,11 +10,12 @@ type PaginationProps = {
 
 const Pagination = ({ maxPage }: PaginationProps) => {
   const { currentPage, setPage } = usePage();
-  const { goNext, goPrev, setCurrent, numList } = usePagination(
-    maxPage,
-    currentPage,
-    setPage
-  );
+  const {
+    goNext,
+    goPrev,
+    setCurrent,
+    numList = [],
+  } = usePagination(maxPage, currentPage, setPage);
 
   return (
     <PaginationWrapper>
@@ -34,7 +35,7 @@ const Pagination = ({ maxPage }: PaginationProps) => {
 
       <Button
         onClick={goNext}
-        isDisabled={(numList?.at(-1) ?? 0) >= maxPage - 1}>
+        isDisabled={(numList[numList.length - 1] ?? 0) >= maxPage - 1}>
         <MdKeyboardArrowRight size='20' />
       </Button>
     </PaginationWrapper>
