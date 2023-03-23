@@ -37,7 +37,7 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
           </TableRow>
         ))}
       </thead>
-      <tbody>
+      <tbody data-testid='tbody'>
         {table.getRowModel().rows.map(row => (
           <TableRow key={row.id}>
             {row.getVisibleCells().map(cell => (

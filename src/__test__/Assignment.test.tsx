@@ -16,6 +16,10 @@ describe('Assignment test', () => {
       </BrowserRouter>
     );
 
-    await screen.debug(undefined, Infinity);
+    await waitFor(() => {
+      const numOfTable = screen.getByTestId('tbody').children.length;
+      expect(numOfTable).toBe(50);
+    });
+    // await screen.debug(undefined, Infinity);
   });
 });
