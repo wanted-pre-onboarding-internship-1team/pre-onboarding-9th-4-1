@@ -29,9 +29,25 @@ describe('Table', () => {
 
     const tableRows = screen.getAllByRole('row');
 
-    expect(tableRows[1]).toHaveTextContent(String(MOCK_DATA[49].id));
-    expect(tableRows[2]).toHaveTextContent(String(MOCK_DATA[48].id));
-    expect(tableRows[3]).toHaveTextContent(String(MOCK_DATA[47].id));
+    expect(tableRows[1]).toHaveTextContent(createIdRegExp(MOCK_DATA[49].id));
+    expect(tableRows[2]).toHaveTextContent(createIdRegExp(MOCK_DATA[48].id));
+    expect(tableRows[3]).toHaveTextContent(createIdRegExp(MOCK_DATA[47].id));
+  });
+
+  test('주문번호 헤더 두번 클릭시 내림차순 정렬', () => {
+    const { result } = renderHook(() => useTableData(MOCK_DATA));
+
+    render(
+      <Table data={result.current.data} columns={result.current.columns} />
+    );
+
+    userEvent.click(screen.getByText('주문번호'));
+    userEvent.click(screen.getByText('주문번호'));
+    const tableRows = screen.getAllByRole('row');
+
+    expect(tableRows[1]).toHaveTextContent(createIdRegExp(MOCK_DATA[0].id));
+    expect(tableRows[2]).toHaveTextContent(createIdRegExp(MOCK_DATA[1].id));
+    expect(tableRows[3]).toHaveTextContent(createIdRegExp(MOCK_DATA[2].id));
   });
 
   test('거래시간 헤더 클릭시 오름차순 정렬', () => {
@@ -58,6 +74,34 @@ describe('Table', () => {
     );
     expect(tableRows[3]).toHaveTextContent(
       String(MOCK_DATA[2].transaction_time)
+    );
+  });
+
+  test('거래시간 헤더 두번 클릭시 내림차순 정렬', () => {
+    const { result } = renderHook(() => useTableData(MOCK_DATA));
+
+    render(
+      <Table data={result.current.data} columns={result.current.columns} />
+    );
+
+    MOCK_DATA.sort(
+      (a, b) =>
+        new Date(a.transaction_time).getTime() -
+        new Date(b.transaction_time).getTime()
+    );
+    userEvent.click(screen.getByText('거래시간'));
+    userEvent.click(screen.getByText('거래시간'));
+
+    const tableRows = screen.getAllByRole('row');
+
+    expect(tableRows[1]).toHaveTextContent(
+      String(MOCK_DATA[49].transaction_time)
+    );
+    expect(tableRows[2]).toHaveTextContent(
+      String(MOCK_DATA[48].transaction_time)
+    );
+    expect(tableRows[3]).toHaveTextContent(
+      String(MOCK_DATA[47].transaction_time)
     );
   });
 
@@ -104,3 +148,7 @@ describe('Table', () => {
     }
   });
 });
+
+function createIdRegExp(id: number) {
+  return new RegExp(`^${id}`);
+}
