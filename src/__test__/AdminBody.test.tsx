@@ -1,12 +1,13 @@
 import AdminBody from './../component/AdminBody';
-import { setup } from './setup.test';
+import { renderAll, setup } from './setup.test';
 import '@testing-library/jest-dom/extend-expect';
 import { cleanup, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('AdminBody', () => {
   beforeEach(() => {
-    setup(<AdminBody />);
+    setup();
+    renderAll(<AdminBody />);
   });
 
   afterEach(() => {

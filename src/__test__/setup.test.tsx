@@ -68,17 +68,15 @@ const data = mockData
   .filter(data => data.transaction_time.includes('2023-03-08'))
   .slice(0, 50);
 
-export const setup = (children: ReactNode) => {
-  const queryClient = new QueryClient();
-
+export const setup = () => {
   jest.spyOn(api, 'getTodayDataApi').mockResolvedValue(data);
 
   jest.spyOn(api, 'getOriginDataApi').mockResolvedValue([...mockData]);
 
-  jest.spyOn(useTableData, 'default').mockReturnValue({
+  jest.spyOn(useTableData, 'default').mockImplementation(dataList => ({
     columns,
-    data,
-  });
+    data: dataList,
+  }));
 
   jest.mock('@tanstack/react-query', () => ({
     ...jest.requireActual('@tanstack/react-query'),
@@ -92,6 +90,10 @@ export const setup = (children: ReactNode) => {
       }),
     }),
   }));
+};
+
+export const renderAll = (children: ReactNode) => {
+  const queryClient = new QueryClient();
 
   render(
     <BrowserRouter>

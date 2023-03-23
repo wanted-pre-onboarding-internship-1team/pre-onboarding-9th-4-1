@@ -8,7 +8,11 @@ const AdminHeader = () => {
     <AdminHeaderWrapper>
       <Title>Today's Orders</Title>
       <HeaderRight>
-        <InputBar value={keyword} onChange={handleChange} />
+        <InputBar
+          data-testid='admin-search-bar'
+          value={keyword}
+          onChange={handleChange}
+        />
         <AiOutlineSearch className='icon' />
       </HeaderRight>
     </AdminHeaderWrapper>
