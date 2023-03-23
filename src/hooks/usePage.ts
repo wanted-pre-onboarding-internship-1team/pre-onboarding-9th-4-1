@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 const usePage = () => {
   const { currentParams, setParams: setPage } = useAdminParams('page');
+
   const currentPage = Number(currentParams);
 
   const [maxPage, setMaxPage] = useState(0);
