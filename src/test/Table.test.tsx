@@ -10,20 +10,21 @@ const MOCK_DATA = orders.slice(0, 50);
 describe('Table', () => {
   test('50개 데이터 보여지는지', () => {
     const { result } = renderHook(() => useTableData(MOCK_DATA));
-
     render(
       <Table data={result.current.data} columns={result.current.columns} />
     );
+
     const tdElement = screen.getAllByRole('row');
     expect(tdElement.length).toBe(51);
   });
 
   test('주문번호 헤더 클릭시 내림차순 정렬', () => {
     const { result } = renderHook(() => useTableData(MOCK_DATA));
-
     render(
       <Table data={result.current.data} columns={result.current.columns} />
     );
+
+    MOCK_DATA.sort((a, b) => a.id - b.id);
 
     userEvent.click(screen.getByText('주문번호'));
 
@@ -36,10 +37,10 @@ describe('Table', () => {
 
   test('주문번호 헤더 두번 클릭시 내림차순 정렬', () => {
     const { result } = renderHook(() => useTableData(MOCK_DATA));
-
     render(
       <Table data={result.current.data} columns={result.current.columns} />
     );
+    MOCK_DATA.sort((a, b) => a.id - b.id);
 
     userEvent.click(screen.getByText('주문번호'));
     userEvent.click(screen.getByText('주문번호'));
@@ -52,11 +53,9 @@ describe('Table', () => {
 
   test('거래시간 헤더 클릭시 오름차순 정렬', () => {
     const { result } = renderHook(() => useTableData(MOCK_DATA));
-
     render(
       <Table data={result.current.data} columns={result.current.columns} />
     );
-
     MOCK_DATA.sort(
       (a, b) =>
         new Date(a.transaction_time).getTime() -
@@ -73,16 +72,15 @@ describe('Table', () => {
 
   test('거래시간 헤더 두번 클릭시 내림차순 정렬', () => {
     const { result } = renderHook(() => useTableData(MOCK_DATA));
-
     render(
       <Table data={result.current.data} columns={result.current.columns} />
     );
-
     MOCK_DATA.sort(
       (a, b) =>
         new Date(a.transaction_time).getTime() -
         new Date(b.transaction_time).getTime()
     );
+
     userEvent.click(screen.getByText('거래시간'));
     userEvent.click(screen.getByText('거래시간'));
 
@@ -95,7 +93,6 @@ describe('Table', () => {
 
   test('필터 한번 클릭시 true만 보여지도록', () => {
     const { result } = renderHook(() => useTableData(MOCK_DATA));
-
     render(
       <Table data={result.current.data} columns={result.current.columns} />
     );
@@ -116,7 +113,6 @@ describe('Table', () => {
 
   test('필터 두번 클릭시 false 보여지도록', () => {
     const { result } = renderHook(() => useTableData(MOCK_DATA));
-
     render(
       <Table data={result.current.data} columns={result.current.columns} />
     );
