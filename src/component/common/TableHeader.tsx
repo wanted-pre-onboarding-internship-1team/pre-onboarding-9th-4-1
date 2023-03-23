@@ -41,6 +41,7 @@ export default function TableHeader<T extends object>({
         ) : null}
         {header.column.getCanFilter() ? (
           <FilterBtn
+            data-testid='filterButton'
             onClick={onChange}
             tagValue={header.column.getFilterValue() as undefined | boolean}
           />
