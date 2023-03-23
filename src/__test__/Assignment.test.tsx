@@ -123,4 +123,24 @@ describe('Assignment test', () => {
     });
     expect(screen.queryByText(/true/)).toBeNull();
   });
+
+  it('assignment 4 - search', async () => {
+    (axios.get as jest.Mock).mockResolvedValue({ data: mockResponse });
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    const searchPrompt = screen.getByTestId('search');
+    waitFor(() => {
+      fireEvent.change(searchPrompt, { target: { value: 'ann' } });
+    });
+    const searched = await screen.findAllByText(/ann/);
+    const annInMock = mockResponse.filter(item => {
+      const regex = new RegExp(`ann.*`);
+      return regex.test(item.customer_name);
+    });
+
+    expect(searched.length).toBe(annInMock.length);
+  });
 });
