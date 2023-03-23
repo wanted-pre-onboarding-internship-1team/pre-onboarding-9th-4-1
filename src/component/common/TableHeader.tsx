@@ -23,6 +23,7 @@ export default function TableHeader<T extends object>({
 
   return (
     <Th
+      data-testid={`table-header-cell-${header.id}`}
       key={header.id}
       onClick={
         allowSortKey(header.id)
@@ -41,6 +42,7 @@ export default function TableHeader<T extends object>({
         ) : null}
         {header.column.getCanFilter() ? (
           <FilterBtn
+            data-testid='table-body-filter-btn'
             onClick={onChange}
             tagValue={header.column.getFilterValue() as undefined | boolean}
           />

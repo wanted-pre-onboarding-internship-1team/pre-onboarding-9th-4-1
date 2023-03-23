@@ -39,9 +39,11 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
       </thead>
       <tbody>
         {table.getRowModel().rows.map(row => (
-          <TableRow key={row.id}>
+          <TableRow data-testid='table-body-row' key={row.id}>
             {row.getVisibleCells().map(cell => (
-              <Td key={cell.id}>
+              <Td
+                data-testid={`table-body-cell-${cell.column.id}`}
+                key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Td>
             ))}
