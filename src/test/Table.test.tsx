@@ -66,15 +66,9 @@ describe('Table', () => {
 
     const tableRows = screen.getAllByRole('row');
 
-    expect(tableRows[1]).toHaveTextContent(
-      String(MOCK_DATA[0].transaction_time)
-    );
-    expect(tableRows[2]).toHaveTextContent(
-      String(MOCK_DATA[1].transaction_time)
-    );
-    expect(tableRows[3]).toHaveTextContent(
-      String(MOCK_DATA[2].transaction_time)
-    );
+    expect(tableRows[1]).toHaveTextContent(MOCK_DATA[0].transaction_time);
+    expect(tableRows[2]).toHaveTextContent(MOCK_DATA[1].transaction_time);
+    expect(tableRows[3]).toHaveTextContent(MOCK_DATA[2].transaction_time);
   });
 
   test('거래시간 헤더 두번 클릭시 내림차순 정렬', () => {
@@ -94,15 +88,9 @@ describe('Table', () => {
 
     const tableRows = screen.getAllByRole('row');
 
-    expect(tableRows[1]).toHaveTextContent(
-      String(MOCK_DATA[49].transaction_time)
-    );
-    expect(tableRows[2]).toHaveTextContent(
-      String(MOCK_DATA[48].transaction_time)
-    );
-    expect(tableRows[3]).toHaveTextContent(
-      String(MOCK_DATA[47].transaction_time)
-    );
+    expect(tableRows[1]).toHaveTextContent(MOCK_DATA[49].transaction_time);
+    expect(tableRows[2]).toHaveTextContent(MOCK_DATA[48].transaction_time);
+    expect(tableRows[3]).toHaveTextContent(MOCK_DATA[47].transaction_time);
   });
 
   test('필터 한번 클릭시 true만 보여지도록', () => {
