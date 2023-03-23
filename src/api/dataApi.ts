@@ -15,6 +15,7 @@ export const getTodayDataApi = async (
   today: string
 ) => {
   const response = await axios.get('/data/mockData.json');
+
   const begin = skip * limit;
   const end = skip * limit + limit || undefined;
 
